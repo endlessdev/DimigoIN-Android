@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">DimigoIN</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">디미고인 계정</string>
+    <string name="prompt_password">비밀번호</string>
+    <string name="action_sign_in">로그인</string>
+    <string name="action_sign_in_short">로그인</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_content">ContentActivity</string>
+
+    <string name="timestamp_now">방금 전</string>
+    <string name="timestamp_minute">분 전</string>
+    <string name="timestamp_hour">시간 전</string>
+    <string name="timestamp_day">일 전</string>
+    <string name="timestamp_month">달 전</string>
+    <string name="timestamp_year">년 전</string>
+
+</resources>
