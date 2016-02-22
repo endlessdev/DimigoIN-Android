@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:layout_marginTop="10dp"
+              android:layout_marginLeft="10dp"
+              android:layout_marginRight="10dp">
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+
+        <Button android:id="@+id/bbs_comment_profile"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/circle_profile"
+                android:text="박"
+                android:textColor="#E91E63"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                style="?android:attr/borderlessButtonStyle"
+        />
+
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+                <TextView android:id="@+id/bbs_comment_author"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textStyle="bold"
+                          android:textColor="#212121"
+                          android:layout_marginRight="5dp"
+                          android:text="정희범"/>
+
+
+                <TextView android:id="@+id/bbs_comment_time"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textStyle="bold"
+                          android:textColor="@color/summary_text"
+                          android:text="5분전"/>
+
+            </LinearLayout>
+
+
+            <TextView android:id="@+id/bbs_comment_content"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="#9E9E9E"
+                      android:text="asdfasdfasdfasdfdasfasdfdsaf\n\nssafsaasdf"/>
+
+            <TextView android:id="@+id/bbs_comment_reply"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="@color/colorPrimary"
+                      android:background="#FCE4EC"
+                      android:paddingLeft="5dp"
+                      android:paddingRight="5dp"
+                      android:text="답글달기"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
