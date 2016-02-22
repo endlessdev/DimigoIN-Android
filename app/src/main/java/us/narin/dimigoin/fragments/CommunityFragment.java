@@ -19,7 +19,6 @@ import us.narin.dimigoin.api.ApiObject;
 import us.narin.dimigoin.api.ApiRequests;
 import us.narin.dimigoin.model.BoardListModel;
 import us.narin.dimigoin.util.BoardIds;
-import us.narin.dimigoin.util.EndlessRecyclerOnScrollListener;
 import us.narin.dimigoin.util.SessionManager;
 
 
@@ -52,14 +51,6 @@ public class CommunityFragment extends Fragment {
             @Override
             public void onRefresh() {
                 getBoardList(mRecyclerView, currentPage);
-            }
-        });
-
-
-        mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
-            @Override
-            public void onLoadMore(int current_page) {
-                Toast.makeText(getActivity(), String.valueOf(current_page), Toast.LENGTH_LONG).show();
             }
         });
 

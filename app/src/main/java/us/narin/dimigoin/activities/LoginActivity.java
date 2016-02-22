@@ -141,12 +141,12 @@ public class LoginActivity extends AppCompatActivity {
                                         final String userCookie = loginResponse.cookie(Schema.LOGIN_COOKIE_KEY);
                                         SessionManager.saveAccount(getApplicationContext(), userId, userPw, loginModel.getData().getToken(), userCookie);
 
-                                        Jsoup.connect("http://jeje.pe.kr/bbs/write_update.php")
-                                                .cookie(Schema.LOGIN_COOKIE_KEY, SessionManager.getUserCookie(getApplicationContext()))
-                                                .data("bo_table", "freeboard")
-                                                .data("wr_subject", "ClientBot TEST")
-                                                .data("wr_content", "세션 앱 테스트")
-                                                .post();
+//                                        Jsoup.connect("http://jeje.pe.kr/bbs/write_update.php")
+//                                                .cookie(Schema.LOGIN_COOKIE_KEY, SessionManager.getUserCookie(getApplicationContext()))
+//                                                .data("bo_table", "freeboard")
+//                                                .data("wr_subject", "ClientBot TEST")
+//                                                .data("wr_content", "세션 앱 테스트")
+//                                                .post();
 
 
                                     } catch (IOException e) {
@@ -176,10 +176,6 @@ public class LoginActivity extends AppCompatActivity {
                         signInButton.setProgress(-1);
                     }
                 });
-
-
-
-
             }
         });
 

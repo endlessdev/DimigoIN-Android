@@ -32,7 +32,6 @@ public class ApiObject {
                 }
             });
 
-
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Schema.API_ENDPOINT)
                     .addConverterFactory(GsonConverterFactory.create())
