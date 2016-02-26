@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class LoginData implements Serializable{
 //
 //    "number": 21,
-//            "expire_time": "2016-01-04",
+//            "expireTime": "2016-01-04",
 //            "grade": 1,
 //            "class": 3,
 //            "token": "dae442a062075104d9af",
@@ -26,14 +26,14 @@ public class LoginData implements Serializable{
 
     Integer number;
     String name;
-    String expire_time;
+    String expireTime;
 
     public LoginData(String token, Integer grade, Integer number, String name, String expire_time){
         this.token = token;
         this.grade = grade;
         this.number = number;
         this.name = name;
-        this.expire_time = expire_time;
+        this.expireTime = expire_time;
     }
 
     public Integer getGrade() {
@@ -44,8 +44,8 @@ public class LoginData implements Serializable{
         return number;
     }
 
-    public String getExpire_time() {
-        return expire_time;
+    public String getExpireTime() {
+        return expireTime;
     }
 
     public String getName() {

@@ -7,4 +7,28 @@
     <color name="colorPrimary">#E91E63</color>
     <color name="colorPrimaryDark">#C2185B</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="default_bg">#EEEEEE</color>
+
+    <color name="tab_color">#E91E63</color>
+    <color name="primary_dark">#C2185B</color>
+
+    <color name="login_btn_primary">#E91E63</color>
+    <color name="login_btn_pressed">#C2185B</color>
+
+    <color name="accent_text">#212121</color>
+    <color name="summary_text">#9E9E9E</color>
+
+    <color name="fb_login_btn_primary">#3b5998</color>
+    <color name="fb_login_btn_pressed">#2a4170</color>
+
+    <color name="naver_login_btn_primary">#2db400</color>
+    <color name="naver_login_btn_pressed">#218400</color>
+
+    <color name="loading_color_1">#E91E63</color>
+    <color name="loading_color_2">#D81B60</color>
+    <color name="loading_color_3">#C2185B</color>
+    <color name="loading_color_4">#AD1457</color>
+
+    <color name="general_text_color">#424242</color>
 </resources>

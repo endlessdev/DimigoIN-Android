@@ -5,18 +5,14 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import us.narin.dimigoin.util.QuickstartPreferences;
+import us.narin.dimigoin.util.Session;
 
 import java.io.IOException;
-
-import us.narin.dimigoin.R;
-import us.narin.dimigoin.util.QuickstartPreferences;
-import us.narin.dimigoin.util.SessionManager;
 
 public class RegistrationIntentService extends IntentService {
 
@@ -53,21 +49,19 @@ public class RegistrationIntentService extends IntentService {
                 Log.i(TAG, "GCM Registration Token: " + token);
 
                 final String finalToken = token;
+
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
 
-
-
                             Log.i(TAG, finalToken);
-                            Log.i(TAG, SessionManager.getUserToken(RegistrationIntentService.this));
-                            Log.i(TAG, SessionManager.getAccountId(RegistrationIntentService.this));
+                            Log.i(TAG, Session.getUserToken(RegistrationIntentService.this));
+                            Log.i(TAG, Session.getAccountId(RegistrationIntentService.this));
 
-
-                            Document doc = Jsoup.connect("http://app.jeje.pe.kr/push/register")
-                                    .data("id", SessionManager.getAccountId(RegistrationIntentService.this))
-                                    .data("token", SessionManager.getUserToken(RegistrationIntentService.this))
+                            Document doc = Jsoup.connect("http://app.allabout.kr/push/register")
+                                    .data("id", Session.getAccountId(RegistrationIntentService.this))
+                                    .data("token", Session.getUserToken(RegistrationIntentService.this))
                                     .data("phoneType", "1")
                                     .data("deviceId", finalToken)
                                     .ignoreContentType(true)

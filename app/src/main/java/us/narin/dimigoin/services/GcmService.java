@@ -9,13 +9,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-
 import com.google.android.gms.gcm.GcmListenerService;
-
-import java.util.Random;
-
 import us.narin.dimigoin.R;
 import us.narin.dimigoin.activities.MainActivity;
+
+import java.util.Random;
 
 /**
  * Created by saltfactory on 6/8/15.
@@ -37,6 +35,7 @@ public class GcmService extends GcmListenerService {
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Title: " + title);
         Log.d(TAG, "Message: " + message);
+        Log.d(TAG, "url: " + data.getString("url"));
 
         // GCM으로 받은 메세지를 디바이스에 알려주는 sendNotification()을 호출한다.
         sendNotification(title, message);

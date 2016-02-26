@@ -36,10 +36,7 @@ public class BoardCommentAdapter extends RecyclerView.Adapter<CommentViewHolder>
     @Override
     public void onBindViewHolder(CommentViewHolder holder, int position) {
         final Comment comment = commentList.get(position);
-        holder.commentProfile.setText(String.valueOf(comment.getCommentAuthor().charAt(0)));
-        holder.commentContent.setText(comment.getCommentContent());
-        holder.commentTime.setText(comment.getPostTime());
-        holder.commentAuthor.setText(comment.getCommentAuthor());
+        holder.bindValue(comment);
     }
 
     @Override

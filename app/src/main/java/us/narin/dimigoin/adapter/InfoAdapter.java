@@ -10,6 +10,7 @@ import us.narin.dimigoin.util.BoardIds;
 /**
  * Created by Seungwoo on 2016. 1. 2..
  */
+
 public class InfoAdapter extends FragmentPagerAdapter {
 
     private static final int COUNT_PAGES = 9;

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import us.narin.dimigoin.R;
 import us.narin.dimigoin.activities.MainActivity;
-import us.narin.dimigoin.adapter.CommunityAdapter;
+import us.narin.dimigoin.adapter.BoardAdapter;
 
 public class CommunityNavFragment extends Fragment {
 
@@ -31,7 +31,7 @@ public class CommunityNavFragment extends Fragment {
             mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
             ViewPager mViewPager = (ViewPager)mView.findViewById(R.id.fragment_comunity_vp);
-            mViewPager.setAdapter(new CommunityAdapter(fragmentManager,getActivity()));
+            mViewPager.setAdapter(new BoardAdapter(fragmentManager,getActivity()));
 
             mTabLayout.setupWithViewPager(mViewPager);
 

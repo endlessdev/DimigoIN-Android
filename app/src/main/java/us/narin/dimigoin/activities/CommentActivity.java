@@ -6,9 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Display;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import retrofit.Call;
 import retrofit.Callback;
@@ -33,8 +34,10 @@ public class CommentActivity extends AppCompatActivity {
         final Integer contentId = mIntent.getIntExtra("content_id", 0);
         final String boardId = mIntent.getStringExtra("content_board");
 
-        final RecyclerView commentView = (RecyclerView)findViewById(R.id.bbs_content_detail_comment_rv);
-        final CardView commentWrapper = (CardView)findViewById(R.id.bbs_content_detail_comment_wrappper);
+        final RecyclerView commentView = (RecyclerView) findViewById(R.id.bbs_content_detail_comment_rv);
+        final CardView commentWrapper = (CardView) findViewById(R.id.bbs_content_detail_comment_wrappper);
+
+        commentWrapper.setVisibility(View.GONE);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         commentView.setLayoutManager(linearLayoutManager);
@@ -80,10 +83,12 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     public void showAsPopup() {
-        Display display = ((WindowManager) getSystemService(WINDOW_SERVICE))
-                .getDefaultDisplay();
-        int width = (int) (display.getWidth() * 0.90);
-        int height = (int) (display.getHeight() * 0.80);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        int width = (int) (displayMetrics.widthPixels * 0.90);
+        int height = (int) (displayMetrics.heightPixels * 0.80);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND,
                 WindowManager.LayoutParams.FLAG_DIM_BEHIND);

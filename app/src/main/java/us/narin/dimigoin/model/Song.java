@@ -12,25 +12,8 @@ public class Song {
     Integer songLikeCount;
     String songLikeUrl;
 
-    public Song(String songUrl, String songSubject, String songSubmitter, String songDate, Integer songLikeCount, String songLikeUrl) {
-        this.songUrl = songUrl;
-        this.songSubject = songSubject;
-        this.songSubmitter = songSubmitter;
-        this.songDate = songDate;
-        this.songLikeCount = songLikeCount;
-        this.songLikeUrl = songLikeUrl;
-    }
-
-    public Integer getSongLikeCount() {
-        return songLikeCount;
-    }
-
-    public String getSongDate() {
-        return songDate;
-    }
-
-    public String getSongLikeUrl() {
-        return songLikeUrl;
+    public String getSongUrl() {
+        return songUrl;
     }
 
     public String getSongSubject() {
@@ -41,7 +24,15 @@ public class Song {
         return songSubmitter;
     }
 
-    public String getSongUrl() {
-        return songUrl;
+    public String getSongDate() {
+        return songDate;
+    }
+
+    public Integer getSongLikeCount() {
+        return songLikeCount;
+    }
+
+    public String getSongLikeUrl() {
+        return songLikeUrl;
     }
 }

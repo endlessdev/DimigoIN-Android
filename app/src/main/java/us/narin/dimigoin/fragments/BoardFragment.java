@@ -56,13 +56,10 @@ public class BoardFragment extends Fragment {
         Log.d("BoardFragment " + boardIds.toString(), "onCreateView()");
 
         refreshBoard = (SwipeRefreshLayout) mView.findViewById(R.id.board_refresh);
-        refreshBoard.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mRecyclerView.setAdapter(itemAdapter);
-                getBoardList(currentPage);
-                Log.d("BoardFragment " + boardIds.toString(), "onRefresh()");
-            }
+        refreshBoard.setOnRefreshListener(() -> {
+            mRecyclerView.setAdapter(itemAdapter);
+            getBoardList(currentPage);
+            Log.d("BoardFragment " + boardIds.toString(), "onRefresh()");
         });
 
 

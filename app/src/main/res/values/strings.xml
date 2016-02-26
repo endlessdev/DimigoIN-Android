@@ -30,5 +30,14 @@
     <string name="timestamp_day">일 전</string>
     <string name="timestamp_month">달 전</string>
     <string name="timestamp_year">년 전</string>
+    <string name="title_activity_comment">CommentActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+
+    <string name="bbs_like">좋아요 </string>
+    <string name="bbs_comment">댓글 </string>
+    <string name="bbs_view">조회수 </string>
+
+    <string name="bbs_unit">건</string>
 
 </resources>

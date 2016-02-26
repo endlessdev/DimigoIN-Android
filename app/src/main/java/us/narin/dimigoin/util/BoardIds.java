@@ -9,14 +9,20 @@ public enum BoardIds {
     FREE("freeboard"),
     KNOWLEDGE("knowledge"),
     LOSTANDFOUND("laf"),
-    SUGGEST("suggest");
+    SUGGEST("suggest"),
+    NOTICE("notice"),
+    CONTEST_INFO("contentinfo"),
+    KIN("kin"),
+    ENJOY("enjoy"),
+    PLAYGROUND("playground"),
+    MARKET("market"),
+    NOTICE_MOBILE("notice_mobile");
 
     private final String boardId;
     private BoardIds(String boardId){
         this.boardId = boardId;
     }
 
-    @Override
     public String toString(){
         return boardId;
     }

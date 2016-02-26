@@ -1,91 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <View
-        android:layout_width="10dp"
-        android:layout_height="match_parent" />
-
-    <LinearLayout
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical">
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@android:color/transparent" />
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:padding="10dp">
 
-        <TextView
-            android:id="@+id/bbs_content_subject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:text="한국디지털미디어고등학교 2015 겨울방학 박스 공동구매"
-            android:textStyle="bold" />
+        <TextView android:id="@+id/bbs_content_subject"
+                  android:layout_width="wrap_content"
+                  android:text="asdf"
+                  android:layout_height="wrap_content"
+                  android:textStyle="bold"
+                  android:textColor="@color/accent_text"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp"
+              android:background="@color/summary_text"/>
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal">
+
+            <Button android:id="@+id/bbs_content_profile"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/circle_profile"
+                    android:text="박"
+                    android:textColor="#E91E63"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    style="?android:attr/borderlessButtonStyle"
+            />
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:layout_gravity="center_vertical">
+
+                <TextView android:id="@+id/bbs_content_author"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textStyle="bold"
+                          android:textColor="#212121"
+                          android:text="정희범"/>
+
+
+                <TextView android:id="@+id/bbs_content_date"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#9E9E9E"
+                          android:text="1분전"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <!--<WebView-->
+        <!--android:id="@+id/bbs_content_content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scrollbars="none"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:focusableInTouchMode="false"-->
+        <!--android:focusable="false"/>-->
+
+        <TextView android:id="@+id/bbs_content_content"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10dp"
+                  android:text="asdf"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1px"
+              android:layout_marginTop="10dp"
+              android:background="#eee"/>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:layout_marginTop="10dp">
 
             <TextView
-                android:id="@+id/bbs_content_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="김동빈" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/bbs_content_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="1분전" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="추천" />
-
-                <TextView
                     android:id="@+id/bbs_content_good_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="26" />
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/summary_text"
+                    android:textSize="11dp"
+                    android:textStyle="bold"
+                    android:text="댓글 수"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="조회" />
+            <TextView android:id="@+id/bbs_content_comment_count"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginRight="10dp"
+                      android:textColor="@color/summary_text"
+                      android:textSize="11dp"
+                      android:textStyle="bold"/>
 
-                <TextView
+
+            <TextView
                     android:id="@+id/bbs_content_view_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:text="26" />
+                    android:textColor="@color/summary_text"
+                    android:textSize="11dp"
+                    android:textStyle="bold"/>
 
-            </LinearLayout>
+
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="@android:color/transparent" />
     </LinearLayout>
 
-    <View
-        android:layout_width="10dp"
-        android:layout_height="match_parent" />
-</LinearLayout>
+</android.support.v7.widget.CardView>
