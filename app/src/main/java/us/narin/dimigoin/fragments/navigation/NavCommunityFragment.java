@@ -1,47 +1,49 @@
-package us.narin.dimigoin.fragments;
+package us.narin.dimigoin.fragments.navigation;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import us.narin.dimigoin.R;
 import us.narin.dimigoin.activities.MainActivity;
-import us.narin.dimigoin.adapter.InfoAdapter;
+import us.narin.dimigoin.adapter.BoardAdapter;
 
-public class InfoNavFragment extends Fragment {
+public class NavCommunityFragment extends Fragment {
 
-    private String[] newsTabTitles = {"공지사항", "학사일정", "디미밥", "대회정보", "지식IN", "맛집 및 놀거리", "디미운동장", "디미마켓", "모바일 공지"};
+    private int[] tabTitleIds = {
+            R.string.tab_name_community_file,
+            R.string.tab_name_community_freeboard,
+            R.string.tab_name_community_knowledge,
+            R.string.tab_name_community_laf,
+            R.string.tab_name_community_suggest
+    };
     TabLayout mTabLayout;
     FragmentManager fragmentManager;
 
-    public InfoNavFragment(FragmentManager fragmentManager) {
+    public NavCommunityFragment(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View mView = inflater.inflate(R.layout.fragment_info_nav, container, false);
+        View mView = inflater.inflate(R.layout.fragment_community_nav, container, false);
         mTabLayout = ((MainActivity) getActivity()).mTabLayout;
         mTabLayout.setVisibility(View.VISIBLE);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        Log.d("InfoNavFragment","onCreateView()");
-
-        ViewPager mViewPager = (ViewPager) mView.findViewById(R.id.fragment_info_vp);
-        mViewPager.setAdapter(new InfoAdapter(fragmentManager, getActivity()));
+        ViewPager mViewPager = (ViewPager) mView.findViewById(R.id.fragment_comunity_vp);
+        mViewPager.setAdapter(new BoardAdapter(fragmentManager, getActivity()));
 
         mTabLayout.setupWithViewPager(mViewPager);
 
-        for (int i = 0; i < newsTabTitles.length; i++) {
-            mTabLayout.getTabAt(i).setText(newsTabTitles[i]);
-        }
+        for (int i = 0; i < tabTitleIds.length; i++)
+            mTabLayout.getTabAt(i).setText(getActivity().getString(tabTitleIds[i]));
 
         return mView;
     }

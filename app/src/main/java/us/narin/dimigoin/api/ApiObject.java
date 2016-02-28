@@ -15,13 +15,11 @@ public class ApiObject {
             OkHttpClient okHttpClient = new OkHttpClient();
             okHttpClient.interceptors().add(chain -> chain.proceed(chain.request()));
 
-
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Schema.API_ENDPOINT)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okHttpClient)
                     .build();
-
 
             apiRequests = retrofit.create(ApiRequests.class);
         }

@@ -20,16 +20,18 @@ import butterknife.Bind;
 import com.bumptech.glide.Glide;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import us.narin.dimigoin.R;
-import us.narin.dimigoin.fragments.CommunityNavFragment;
-import us.narin.dimigoin.fragments.InfoNavFragment;
-import us.narin.dimigoin.fragments.MainFragment;
-import us.narin.dimigoin.fragments.SubmitNavFragment;
-import us.narin.dimigoin.model.Login;
+import us.narin.dimigoin.fragments.navigation.NavCommunityFragment;
+import us.narin.dimigoin.fragments.navigation.NavInfoFragment;
+import us.narin.dimigoin.fragments.navigation.MainFragment;
+import us.narin.dimigoin.fragments.navigation.NavSubmitFragment;
+import us.narin.dimigoin.model.pojo.Login;
+import us.narin.dimigoin.util.Schema;
 import us.narin.dimigoin.util.Session;
-import us.narin.dimigoin.util.TransactionFrag;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "MainActivity";
 
     public TabLayout mTabLayout;
     public Toolbar toolbar;
@@ -67,11 +69,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         Login login = (Login) getIntent().getSerializableExtra("stdModel");
         Toast.makeText(getApplicationContext(), String.format("%d학년 %d반 %d번 재학생", login.getData().getGrade(), login.getData().getStdClass(), login.getData().getNumber()), Toast.LENGTH_LONG).show();
-
-
 
         View rootView = navigationView.getHeaderView(0);
         navUserName = (TextView)rootView.findViewById(R.id.nav_user_name);
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity
         navUserName.setText(String.format("%s(%s)", login.getData().getName(), Session.getAccountId(getApplicationContext())));
         navUserData.setText(String.format("%d학년 %d반 %d번 재학생", login.getData().getGrade(), login.getData().getStdClass(), login.getData().getNumber()));
 
-        setFragment(TransactionFrag.HOME);
+        setFragment(Schema.TransactionFrag.HOME);
 
         navigationView.getMenu().getItem(0).setChecked(true);
 
@@ -107,16 +106,16 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         switch (id){
             case R.id.nav_home:
-                setFragment(TransactionFrag.HOME);
+                setFragment(Schema.TransactionFrag.HOME);
                 break;
             case R.id.nav_info:
-                setFragment(TransactionFrag.INFO);
+                setFragment(Schema.TransactionFrag.INFO);
                 break;
             case R.id.nav_comunity:
-                setFragment(TransactionFrag.COMMUNITY);
+                setFragment(Schema.TransactionFrag.COMMUNITY);
                 break;
             case R.id.nav_submit:
-                setFragment(TransactionFrag.SUBMIT);
+                setFragment(Schema.TransactionFrag.SUBMIT);
                 break;
         }
 
@@ -125,29 +124,29 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void setFragment(TransactionFrag flag) {
+    public void setFragment(Schema.TransactionFrag flag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (flag) {
             case HOME:
                 MainFragment mainFragment = new MainFragment();
                 fragmentTransaction.replace(R.id.content_fragment, mainFragment);
-                Log.d("MainActivity","setFragment(HOME)");
+                Log.d(TAG,"setFragment(HOME)");
                 break;
             case INFO:
-                InfoNavFragment infoNavFragment = new InfoNavFragment(fragmentManager);
+                NavInfoFragment infoNavFragment = new NavInfoFragment(fragmentManager);
                 fragmentTransaction.replace(R.id.content_fragment, infoNavFragment);
-                Log.d("MainActivity","setFragment(INFO)");
+                Log.d(TAG,"setFragment(INFO)");
                 break;
             case COMMUNITY:
-                CommunityNavFragment communityNavFragment = new CommunityNavFragment(fragmentManager);
+                NavCommunityFragment communityNavFragment = new NavCommunityFragment(fragmentManager);
                 fragmentTransaction.replace(R.id.content_fragment, communityNavFragment);
-                Log.d("MainActivity","setFragment(COMMUNITY)");
+                Log.d(TAG,"setFragment(COMMUNITY)");
                 break;
             case SUBMIT:
-                SubmitNavFragment submitNavFragment = new SubmitNavFragment(fragmentManager);
+                NavSubmitFragment submitNavFragment = new NavSubmitFragment(fragmentManager);
                 fragmentTransaction.replace(R.id.content_fragment, submitNavFragment);
-                Log.d("MainActivity","setFragment(SUBMIT)");
+                Log.d(TAG,"setFragment(SUBMIT)");
                 break;
         }
         fragmentTransaction.commit();

@@ -5,7 +5,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        style="@style/ContentCard">
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent"
@@ -14,7 +15,6 @@
 
         <TextView android:id="@+id/bbs_content_subject"
                   android:layout_width="wrap_content"
-                  android:text="asdf"
                   android:layout_height="wrap_content"
                   android:textStyle="bold"
                   android:textColor="@color/accent_text"/>
@@ -34,9 +34,8 @@
                     android:layout_height="45dp"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/circle_profile"
-                    android:text="박"
                     android:textColor="#E91E63"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
                     style="?android:attr/borderlessButtonStyle"

@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import us.narin.dimigoin.fragments.BoardFragment;
-import us.narin.dimigoin.util.BoardIds;
+import us.narin.dimigoin.fragments.element.BoardFragment;
+import us.narin.dimigoin.util.Schema;
 
 /**
  * Created by Seungwoo on 2016. 1. 2..
@@ -27,23 +27,23 @@ public class InfoAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new BoardFragment(BoardIds.NOTICE);
+                return new BoardFragment(Schema.BoardIds.NOTICE);
             case 1:
-                return new BoardFragment(BoardIds.FREE);
+                return new BoardFragment(Schema.BoardIds.FREE);
             case 2:
-                return new BoardFragment(BoardIds.KNOWLEDGE);
+                return new BoardFragment(Schema.BoardIds.KNOWLEDGE);
             case 3:
-                return new BoardFragment(BoardIds.CONTEST_INFO);
+                return new BoardFragment(Schema.BoardIds.CONTEST_INFO);
             case 4:
-                return new BoardFragment(BoardIds.KIN);
+                return new BoardFragment(Schema.BoardIds.KIN);
             case 5:
-                return new BoardFragment(BoardIds.ENJOY);
+                return new BoardFragment(Schema.BoardIds.ENJOY);
             case 6:
-                return new BoardFragment(BoardIds.PLAYGROUND);
+                return new BoardFragment(Schema.BoardIds.PLAYGROUND);
             case 7:
-                return new BoardFragment(BoardIds.MARKET);
+                return new BoardFragment(Schema.BoardIds.MARKET);
             case 8:
-                return new BoardFragment(BoardIds.NOTICE_MOBILE);
+                return new BoardFragment(Schema.BoardIds.NOTICE_MOBILE);
         }
         return null;
     }

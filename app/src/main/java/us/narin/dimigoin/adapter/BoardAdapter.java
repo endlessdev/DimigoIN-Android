@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import us.narin.dimigoin.fragments.BoardFragment;
-import us.narin.dimigoin.util.BoardIds;
+import us.narin.dimigoin.fragments.element.BoardFragment;
+import us.narin.dimigoin.util.Schema;
 
 /**
  * Created by Seungwoo on 2016. 1. 2..
@@ -27,15 +27,15 @@ public class BoardAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new BoardFragment(BoardIds.FILE);
+                return new BoardFragment(Schema.BoardIds.FILE);
             case 1:
-                return new BoardFragment(BoardIds.FREE);
+                return new BoardFragment(Schema.BoardIds.FREE);
             case 2:
-                return new BoardFragment(BoardIds.KNOWLEDGE);
+                return new BoardFragment(Schema.BoardIds.KNOWLEDGE);
             case 3:
-                return new BoardFragment(BoardIds.LOSTANDFOUND);
+                return new BoardFragment(Schema.BoardIds.LOSTANDFOUND);
             case 4:
-                return new BoardFragment(BoardIds.SUGGEST);
+                return new BoardFragment(Schema.BoardIds.SUGGEST);
         }
         return null;
     }

@@ -1,4 +1,4 @@
-package us.narin.dimigoin.model;
+package us.narin.dimigoin.model.pojo;
 
 import java.io.Serializable;
 

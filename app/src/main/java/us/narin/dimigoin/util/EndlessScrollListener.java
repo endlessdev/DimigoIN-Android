@@ -3,7 +3,7 @@ package us.narin.dimigoin.util;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener {
+public abstract class EndlessScrollListener extends RecyclerView.OnScrollListener {
     private boolean mLoading = false; // True if we are still waiting for the last set of data to load
 
     private int previousItemCount = 10; // The total number of items in the dataset after the last load
@@ -13,7 +13,7 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
 
     private LinearLayoutManager mLinearLayoutManager;
 
-    public EndlessRecyclerOnScrollListener(LinearLayoutManager linearLayoutManager) {
+    public EndlessScrollListener(LinearLayoutManager linearLayoutManager) {
         mLinearLayoutManager = linearLayoutManager;
     }
 

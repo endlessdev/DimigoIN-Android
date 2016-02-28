@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import us.narin.dimigoin.fragments.CounselSubmitFragment;
-import us.narin.dimigoin.fragments.MentoSubmitFragment;
+import us.narin.dimigoin.fragments.element.CounselSubmitFragment;
+import us.narin.dimigoin.fragments.element.MentoSubmitFragment;
 
 /**
  * Created by Seungwoo on 2016. 1. 2..

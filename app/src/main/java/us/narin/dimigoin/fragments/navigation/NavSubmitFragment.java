@@ -1,4 +1,4 @@
-package us.narin.dimigoin.fragments;
+package us.narin.dimigoin.fragments.navigation;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -13,13 +13,13 @@ import us.narin.dimigoin.R;
 import us.narin.dimigoin.activities.MainActivity;
 import us.narin.dimigoin.adapter.SubmitAdapter;
 
-public class SubmitNavFragment extends Fragment {
+public class NavSubmitFragment extends Fragment {
 
     private String[] newsTabTitles = {"상담신청", "인강실신청", "멘토신청", "간식신청", "기상송신청", "잔류신청", "빨래신청", "방과후 신청"};
     TabLayout mTabLayout;
     FragmentManager fragmentManager;
 
-    public SubmitNavFragment(FragmentManager fragmentManager) {
+    public NavSubmitFragment(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 

@@ -1,4 +1,4 @@
-package us.narin.dimigoin.fragments;
+package us.narin.dimigoin.fragments.element;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,10 +17,10 @@ import us.narin.dimigoin.R;
 import us.narin.dimigoin.adapter.BoardContentAdapter;
 import us.narin.dimigoin.api.ApiObject;
 import us.narin.dimigoin.api.ApiRequests;
-import us.narin.dimigoin.model.BoardList;
-import us.narin.dimigoin.model.Content;
-import us.narin.dimigoin.util.BoardIds;
-import us.narin.dimigoin.util.EndlessRecyclerOnScrollListener;
+import us.narin.dimigoin.model.pojo.BoardList;
+import us.narin.dimigoin.model.pojo.Content;
+import us.narin.dimigoin.util.EndlessScrollListener;
+import us.narin.dimigoin.util.Schema;
 import us.narin.dimigoin.util.Session;
 
 import java.util.ArrayList;
@@ -29,13 +29,13 @@ import java.util.List;
 
 public class BoardFragment extends Fragment {
 
-    private BoardIds boardIds;
+    private Schema.BoardIds boardIds;
     private Integer currentPage = 1;
     private BoardContentAdapter itemAdapter;
     private List<Content> boardList;
     private SwipeRefreshLayout refreshBoard;
 
-    public BoardFragment(BoardIds boardIds) {
+    public BoardFragment(Schema.BoardIds boardIds) {
         this.boardIds = boardIds;
     }
 
@@ -63,7 +63,7 @@ public class BoardFragment extends Fragment {
         });
 
 
-        mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(linearLayoutManager) {
+        mRecyclerView.addOnScrollListener(new EndlessScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int current_page) {
                 boardList.addAll(getBoardList(current_page));

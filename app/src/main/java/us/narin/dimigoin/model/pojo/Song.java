@@ -1,4 +1,4 @@
-package us.narin.dimigoin.model;
+package us.narin.dimigoin.model.pojo;
 
 /**
  * Created by Seungwoo on 2015. 12. 24..

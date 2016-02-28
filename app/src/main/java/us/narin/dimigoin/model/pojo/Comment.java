@@ -1,4 +1,4 @@
-package us.narin.dimigoin.model;
+package us.narin.dimigoin.model.pojo;
 
 
 import com.google.gson.annotations.SerializedName;

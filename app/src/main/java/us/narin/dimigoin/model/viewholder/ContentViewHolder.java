@@ -10,10 +10,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.safety.Whitelist;
 import us.narin.dimigoin.R;
 import us.narin.dimigoin.activities.ContentActivity;
-import us.narin.dimigoin.model.Content;
-import us.narin.dimigoin.util.BoardIds;
+import us.narin.dimigoin.model.pojo.Content;
+import us.narin.dimigoin.util.Schema;
 import us.narin.dimigoin.util.TimeStamp;
 
 public class ContentViewHolder extends RecyclerView.ViewHolder {
@@ -34,11 +35,10 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
     Button bbsProfile;
     @Bind(R.id.bbs_content_content)
     TextView bbsContent;
-
     Context mContext;
-    BoardIds boardIds;
+    Schema.BoardIds boardIds;
 
-    public ContentViewHolder(View itemView, Context mContext, BoardIds boardIds) {
+    public ContentViewHolder(View itemView, Context mContext, Schema.BoardIds boardIds) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         this.mContext = mContext;
@@ -54,8 +54,7 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
         bbsProfile.setText(String.valueOf(content.getContentAuthor().charAt(0)));
         bbsCommentCount.setText("댓글 " + String.valueOf(content.getContentCommentCount()) + "건");
 
-        Document doc = Jsoup.parse(content.getContentBody());
-        bbsContent.setText(doc.text());
+        bbsContent.setText(br2nl(content.getContentBody()).trim().replaceAll("&nbsp;",""));
 
         itemView.setOnClickListener(v -> {
             Intent contentDetail = new Intent(mContext, ContentActivity.class);
@@ -64,5 +63,16 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
             contentDetail.putExtra("content_board" , boardIds.toString());
             mContext.startActivity(contentDetail);
         });
+    }
+
+    public static String br2nl(String html) {
+        if(html==null)
+            return html;
+        Document document = Jsoup.parse(html);
+        document.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
+        document.select("br").append("\\n");
+        document.select("p").prepend("\\n");
+        String s = document.html().replaceAll("\\\\n", "\n");
+        return Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
     }
 }

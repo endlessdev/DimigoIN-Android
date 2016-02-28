@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import us.narin.dimigoin.R;
-import us.narin.dimigoin.model.Comment;
+import us.narin.dimigoin.model.pojo.Comment;
 import us.narin.dimigoin.model.viewholder.CommentViewHolder;
 
 import java.util.ArrayList;
@@ -25,7 +25,6 @@ public class BoardCommentAdapter extends RecyclerView.Adapter<CommentViewHolder>
         this.mContext = mContext;
         this.commentList = contentModelList;
     }
-
 
     @Override
     public CommentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

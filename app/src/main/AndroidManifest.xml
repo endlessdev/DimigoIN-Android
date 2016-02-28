@@ -51,14 +51,14 @@
         </receiver>
 
         <service
-            android:name=".services.GcmService"
+            android:name=".services.gcm.ListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
         <service
-            android:name=".services.RegistrationIntentService"
+            android:name=".services.gcm.RegistrationService"
             android:exported="false" />
 
         <activity

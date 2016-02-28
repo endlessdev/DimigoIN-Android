@@ -81,8 +81,8 @@
                 custom:pb_colorNormal="#E91E63"
                 custom:pb_colorPressed="#C2185B"
                 custom:pb_colorProgress="@color/purple_progress"
-                custom:pb_textComplete="로그인 성공"
-                custom:pb_textProgress="로그인중입니다." />
+                custom:pb_textComplete="@string/login_succeed_msg"
+                custom:pb_textProgress="@string/login_processing_msg" />
 
 
         </LinearLayout>

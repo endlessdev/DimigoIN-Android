@@ -1,4 +1,4 @@
-package us.narin.dimigoin.fragments;
+package us.narin.dimigoin.fragments.navigation;
 
 import android.graphics.Typeface;
 import android.os.Bundle;

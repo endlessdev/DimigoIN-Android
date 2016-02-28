@@ -1,4 +1,4 @@
-package us.narin.dimigoin.services;
+package us.narin.dimigoin.services.gcm;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -18,7 +18,7 @@ import java.util.Random;
 /**
  * Created by saltfactory on 6/8/15.
  */
-public class GcmService extends GcmListenerService {
+public class ListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
 

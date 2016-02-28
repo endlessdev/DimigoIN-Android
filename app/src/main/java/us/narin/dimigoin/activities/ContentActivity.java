@@ -26,12 +26,12 @@ import us.narin.dimigoin.R;
 import us.narin.dimigoin.adapter.BoardCommentAdapter;
 import us.narin.dimigoin.api.ApiObject;
 import us.narin.dimigoin.api.ApiRequests;
-import us.narin.dimigoin.model.ContentDetail;
-import us.narin.dimigoin.model.File;
+import us.narin.dimigoin.model.pojo.ContentDetail;
+import us.narin.dimigoin.model.pojo.File;
 import us.narin.dimigoin.util.Schema;
 import us.narin.dimigoin.util.Session;
 import us.narin.dimigoin.util.TimeStamp;
-import us.narin.dimigoin.util.WrappingLinearLayoutManager;
+import us.narin.dimigoin.util.NestedInRecyclerManager;
 
 import java.util.List;
 
@@ -144,7 +144,7 @@ public class ContentActivity extends AppCompatActivity {
                 if(!tmpModel.getComments().isEmpty()){
 
                     //fix NestiedScroollView in RecyclerView
-                    commentView.setLayoutManager(new WrappingLinearLayoutManager(getApplicationContext()));
+                    commentView.setLayoutManager(new NestedInRecyclerManager(getApplicationContext()));
                     commentView.setHasFixedSize(false);
                     commentView.setNestedScrollingEnabled(false);
 

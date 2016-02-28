@@ -9,10 +9,10 @@ import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
-import us.narin.dimigoin.model.BoardList;
-import us.narin.dimigoin.model.ContentDetail;
-import us.narin.dimigoin.model.File;
-import us.narin.dimigoin.model.Login;
+import us.narin.dimigoin.model.pojo.BoardList;
+import us.narin.dimigoin.model.pojo.ContentDetail;
+import us.narin.dimigoin.model.pojo.File;
+import us.narin.dimigoin.model.pojo.Login;
 
 public interface ApiRequests {
 

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import us.narin.dimigoin.R;
-import us.narin.dimigoin.model.Comment;
+import us.narin.dimigoin.model.pojo.Comment;
 
 /**
  * Created by Seungwoo on 2016. 2. 21..

@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import us.narin.dimigoin.R;
-import us.narin.dimigoin.model.Content;
+import us.narin.dimigoin.model.pojo.Content;
 import us.narin.dimigoin.model.viewholder.ContentViewHolder;
-import us.narin.dimigoin.util.BoardIds;
+import us.narin.dimigoin.util.Schema;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +16,12 @@ import java.util.List;
 public class BoardContentAdapter extends RecyclerView.Adapter<ContentViewHolder> {
 
     List<Content> contentList = new ArrayList<>();
-    BoardIds  boardIds;
+    Schema.BoardIds boardIds;
     Context mContext;
 
 
 
-    public BoardContentAdapter(Context mContext, BoardIds boardIds, List<Content> contentList){
+    public BoardContentAdapter(Context mContext, Schema.BoardIds boardIds, List<Content> contentList){
         this.contentList = contentList;
         this.boardIds = boardIds;
         this.mContext = mContext;

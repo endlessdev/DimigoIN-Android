@@ -32,4 +32,16 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!--front-end-->
+
+    <!--card_view:cardCornerRadius="0dp"-->
+    <!--card_view:cardElevation="3dp"-->
+    <!---->
+    <style name="ContentCard" parent="CardView.Light">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="cardCornerRadius">2dp</item>
+        <item name="cardElevation">1dp</item>
+
+    </style>
+
 </resources>

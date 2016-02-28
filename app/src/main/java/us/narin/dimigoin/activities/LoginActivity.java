@@ -1,24 +1,20 @@
 package us.narin.dimigoin.activities;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dd.processbutton.ProcessButton;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.GoogleApiAvailability;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -28,169 +24,132 @@ import retrofit.Response;
 import us.narin.dimigoin.R;
 import us.narin.dimigoin.api.ApiObject;
 import us.narin.dimigoin.api.ApiRequests;
-import us.narin.dimigoin.model.Login;
-import us.narin.dimigoin.services.RegistrationIntentService;
-import us.narin.dimigoin.util.QuickstartPreferences;
+import us.narin.dimigoin.model.pojo.Login;
+import us.narin.dimigoin.services.gcm.RegistrationService;
 import us.narin.dimigoin.util.Schema;
 import us.narin.dimigoin.util.Session;
 
 import java.io.IOException;
 
-/**
- * A login screen that offers login via email/password.
- */
 public class LoginActivity extends AppCompatActivity {
 
-    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
-    private static final String TAG = "MainActivity";
-    private BroadcastReceiver mRegistrationBroadcastReceiver;
-
-    // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
-    public ProcessButton signInButton;
+    private AutoCompleteTextView accountField;
+    private EditText passwordField;
+    private ProcessButton signInBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        registBroadcastReceiver();
-
         Glide.with(getApplicationContext()).load(R.drawable.login_bg).diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().bitmapTransform(new GrayscaleTransformation(getApplicationContext())).into((ImageView) findViewById(R.id.login_main_bg));
 
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        accountField = (AutoCompleteTextView) findViewById(R.id.email);
+        passwordField = (EditText) findViewById(R.id.password);
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    return true;
-                }
-                return false;
-            }
-        });
+        signInBtn = (ActionProcessButton) findViewById(R.id.sign_in_button);
+        signInBtn.setOnClickListener(view -> {
+            signInBtn.setProgress(50);
+            final String userId = accountField.getText().toString();
+            final String userPw = passwordField.getText().toString();
 
-        signInButton = (ActionProcessButton) findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(view -> {
-            signInButton.setProgress(50);
-            final String userId = mEmailView.getText().toString();
-            final String userPw = mPasswordView.getText().toString();
-
-            mEmailView.setEnabled(false);
-            mPasswordView.setEnabled(false);
-            signInButton.setEnabled(false);
+            setEnabled(false);
 
             ApiRequests apiRequests = ApiObject.initClient();
             Call<Login> callLogin = apiRequests.apiLogin(userId, userPw);
-            callLogin.enqueue(new Callback<Login>() {
+            if (isConnectionAvailable()) {
+                callLogin.enqueue(new Callback<Login>() {
 
-                @Override
-                public void onResponse(Response<Login> response) {
-                    final Login login = response.body();
-                    if (response.code() == 200) {
+                    @Override
+                    public void onResponse(Response<Login> response) {
+                        final Login login = response.body();
+                        if (response.code() == 200) {
 
-                        new Thread(() -> {
-                            try {
-                                Connection.Response loginResponse = Jsoup.connect(Schema.LOGIN_WEB_ENDPOINT)
-                                        .data(Schema.LOGIN_WEB_PARAM_ID, userId)
-                                        .data(Schema.LOGIN_WEB_PARAM_PW, userPw)
-                                        .method(Connection.Method.POST)
-                                        .execute();
+                            new Thread(() -> {
+                                try {
+//                                디미고인 웹버전으로 로그인하여 쿠키 탈취
+                                    Connection.Response loginResponse = Jsoup.connect(Schema.LOGIN_WEB_ENDPOINT)
+                                            .data(Schema.LOGIN_WEB_PARAM_ID, userId)
+                                            .data(Schema.LOGIN_WEB_PARAM_PW, userPw)
+                                            .method(Connection.Method.POST)
+                                            .execute();
 
-                                final String userCookie = loginResponse.cookie(Schema.LOGIN_COOKIE_KEY);
-                                Session.saveAccount(getApplicationContext(), userId, userPw, login.getData().getToken(), userCookie);
+//                                API가 미반영된 기능에 대한 지원을 위해 쿠키를 저장합니다
+//                                쿠키는 로그인 성공마다 갱신되어 반영됩니다.
+                                    final String userCookie = loginResponse.cookie(Schema.LOGIN_COOKIE_KEY);
+                                    Session.saveAccount(getApplicationContext(), userId, userPw, login.getData().getToken(), userCookie);
 
-//                                        Jsoup.connect("http://jeje.pe.kr/bbs/write_update.php")
-//                                                .cookie(Schema.LOGIN_COOKIE_KEY, Session.getUserCookie(getApplicationContext()))
-//                                                .data("bo_table", "freeboard")
-//                                                .data("wr_subject", "ClientBot TEST")
-//                                                .data("wr_content", "세션 앱 테스트")
-//                                                .post();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }).start();
 
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }).start();
+                            signInBtn.setProgress(100);
 
-                        signInButton.setProgress(100);
+                            getInstanceIdToken();
 
-                        getInstanceIdToken();
+                            Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            mainIntent.putExtra("stdModel", login);
+                            startActivity(mainIntent);
 
-                        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-                        mainIntent.putExtra("stdModel", login);
-                        startActivity(mainIntent);
-                    } else {
-                        signInButton.setErrorText("로그인에 실패했습니다.");
-                        signInButton.setProgress(-1);
-                        mEmailView.setEnabled(true);
-                        mPasswordView.setEnabled(true);
-                        signInButton.setEnabled(true);
+                        } else {
+                            signInBtn.setErrorText(getString(R.string.login_failed_msg));
+                            signInBtn.setProgress(-1);
+                            setEnabled(true);
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Throwable t) {
-                    signInButton.setProgress(-1);
-                }
-            });
+                    @Override
+                    public void onFailure(Throwable t) {
+                        signInBtn.setProgress(-1);
+                        setEnabled(true);
+                    }
+                });
 
-
-
-
+            }else {
+                signInBtn.setErrorText(getString(R.string.login_failed_network_msg));
+                setEnabled(true);
+            }
         });
-
-        mLoginFormView = findViewById(R.id.login_form);
 
     }
 
-    public void getInstanceIdToken() {
-        if (checkPlayServices()) {
+    private void setEnabled(boolean isEnabled) {
+            accountField.setEnabled(isEnabled);
+            passwordField.setEnabled(isEnabled);
+            signInBtn.setEnabled(isEnabled);
+    }
+
+    private void getInstanceIdToken() {
+        if (isPlayServicesAvailable()) {
             // Start IntentService to register this application with GCM.
-            Intent intent = new Intent(this, RegistrationIntentService.class);
+            Intent intent = new Intent(this, RegistrationService.class);
             startService(intent);
         }
     }
 
-    public void registBroadcastReceiver() {
-        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-
-                switch (action) {
-                    case QuickstartPreferences.REGISTRATION_READY:
-                        // 액션이 READY일 경우
-                        break;
-                    case QuickstartPreferences.REGISTRATION_GENERATING:
-                        // 액션이 GENERATING일 경우
-                        break;
-                    case QuickstartPreferences.REGISTRATION_COMPLETE:
-                        // 액션이 COMPLETE일 경우
-//                        String token = intent.getStringExtra("token");
-                        break;
-                }
-
-            }
-        };
+    //    GCM이 구동되기위해 필요한 구글 플레이서비스의 유무를 검사합니다.
+    private boolean isPlayServicesAvailable() {
+        final GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this);
+        return resultCode != ConnectionResult.SUCCESS && !googleApiAvailability.isUserResolvableError(resultCode);
     }
 
-    private boolean checkPlayServices() {
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
-                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
-                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
-            } else {
-                Log.i(TAG, "This device is not supported.");
-                finish();
+    //    로그인 시도중 네트워크 연결을 확인합니다.
+    private boolean isConnectionAvailable() {
+        final ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null) {
+            switch (networkInfo.getType()) {
+                case ConnectivityManager.TYPE_WIFI:
+                    return true;
+                case ConnectivityManager.TYPE_MOBILE:
+                    return true;
             }
+        } else {
             return false;
         }
-        return true;
+        return false;
     }
 
 }

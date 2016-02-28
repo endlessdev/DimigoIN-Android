@@ -1,4 +1,4 @@
-package us.narin.dimigoin.services;
+package us.narin.dimigoin.services.gcm;
 
 import android.annotation.SuppressLint;
 import android.app.IntentService;
@@ -14,11 +14,11 @@ import us.narin.dimigoin.util.Session;
 
 import java.io.IOException;
 
-public class RegistrationIntentService extends IntentService {
+public class RegistrationService extends IntentService {
 
-    private static final String TAG = "RegistrationIntentService";
+    private static final String TAG = "RegistrationService";
 
-    public RegistrationIntentService() {
+    public RegistrationService() {
         super(TAG);
     }
 
@@ -56,12 +56,12 @@ public class RegistrationIntentService extends IntentService {
                         try {
 
                             Log.i(TAG, finalToken);
-                            Log.i(TAG, Session.getUserToken(RegistrationIntentService.this));
-                            Log.i(TAG, Session.getAccountId(RegistrationIntentService.this));
+                            Log.i(TAG, Session.getUserToken(RegistrationService.this));
+                            Log.i(TAG, Session.getAccountId(RegistrationService.this));
 
                             Document doc = Jsoup.connect("http://app.allabout.kr/push/register")
-                                    .data("id", Session.getAccountId(RegistrationIntentService.this))
-                                    .data("token", Session.getUserToken(RegistrationIntentService.this))
+                                    .data("id", Session.getAccountId(RegistrationService.this))
+                                    .data("token", Session.getUserToken(RegistrationService.this))
                                     .data("phoneType", "1")
                                     .data("deviceId", finalToken)
                                     .ignoreContentType(true)

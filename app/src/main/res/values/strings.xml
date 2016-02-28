@@ -32,6 +32,25 @@
     <string name="timestamp_year">년 전</string>
     <string name="title_activity_comment">CommentActivity</string>
 
+    <string name="tab_name_info_notice">공지사항</string>
+    <string name="tab_name_info_calendar">학사일정</string>
+    <string name="tab_name_info_meal">디미밥</string>
+    <string name="tab_name_info_contest">대회정보</string>
+    <string name="tab_name_info_kin">지식IN</string>
+    <string name="tab_name_info_enjoy">맛집 및 놀거리</string>
+    <string name="tab_name_info_playground">디미운동장</string>
+    <string name="tab_name_info_market">디미마켓</string>
+    <string name="tab_name_info_notice_moblie">모바일 공지</string>
+
+    <string name="tab_name_community_file">자료게시판</string>
+    <string name="tab_name_community_freeboard">자유게시판</string>
+    <string name="tab_name_community_knowledge">지식나눔대회 후기</string>
+    <string name="tab_name_community_laf">분실물 &amp; 습득물</string>
+    <string name="tab_name_community_suggest">건의사항</string>
+
+    <string name="comment_edittext_hint">댓글을 입력해보세요.</string>
+    <string name="comment_botton_text">입력</string>
+
     <string name="hello_world">Hello world!</string>
 
     <string name="bbs_like">좋아요 </string>
@@ -39,5 +58,9 @@
     <string name="bbs_view">조회수 </string>
 
     <string name="bbs_unit">건</string>
+    <string name="login_failed_msg">로그인에 실패했습니다.</string>
+    <string name="login_failed_network_msg">네트워크를 확인해주세요.</string>
+    <string name="login_succeed_msg">로그인 성공</string>
+    <string name="login_processing_msg">로그인 중입니다.</string>
 
 </resources>

@@ -44,6 +44,7 @@
                           android:layout_height="wrap_content"
                           android:textStyle="bold"
                           android:textColor="@color/summary_text"
+                          android:textSize="@dimen/content_small_text"
                           android:text="5분전"/>
 
             </LinearLayout>
@@ -62,6 +63,7 @@
                       android:background="#FCE4EC"
                       android:paddingLeft="5dp"
                       android:paddingRight="5dp"
+
                       android:text="답글달기"/>
         </LinearLayout>
 
