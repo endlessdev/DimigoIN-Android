@@ -5,6 +5,7 @@ package us.narin.dimigoin.util;
  */
 public class Schema {
 
+    public static final String ENDPOINT = "http://allabout.kr";
     public static final String API_ENDPOINT = "http://app.allabout.kr";
     public static final String FILE_DOWNLOAD = API_ENDPOINT+"/board/article/download/";
 
@@ -19,6 +20,8 @@ public class Schema {
     public static final String REGISTRATION_READY = "registrationReady";
     public static final String REGISTRATION_GENERATING = "registrationGenerating";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
+
+    public static final Integer GCM_REGISTRATION_PHONETYPE = 1;
 
     public static enum BoardIds {
 

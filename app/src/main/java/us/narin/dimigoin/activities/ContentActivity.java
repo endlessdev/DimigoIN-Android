@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -96,6 +97,8 @@ public class ContentActivity extends AppCompatActivity {
         }
 
         Glide.with(getApplicationContext()).load(R.drawable.nav_bg).into((ImageView) findViewById(R.id.content_bg));
+        
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         final WebSettings webSettings  = contentView.getSettings();
 //        webSettings.setJavaScriptEnabled(true);
@@ -115,8 +118,6 @@ public class ContentActivity extends AppCompatActivity {
                 final List<File> fileList = response.body().getResultData().get(0).getFiles();
                 contentView.loadData(Schema.WEBVIEW_DEFAULT_STYLE + tmpModel.getArticle().getContentBody(), Schema.WEBVIEW_DEFAULT_TYPE, null);
 
-
-
                 contentAuthor.setText(tmpModel.getArticle().getAuthorName());
                 contentTime.setText(new TimeStamp(getApplicationContext()).getTimes(tmpModel.getArticle().getPostTime()));
                 contentProfile.setText(String.valueOf(tmpModel.getArticle().getAuthorName().charAt(0)));
@@ -125,24 +126,19 @@ public class ContentActivity extends AppCompatActivity {
                 commentCount.setText(bbsComment+ tmpModel.getComments().size() + bbsUnit);
                 viewCount.setText(bbsView+ tmpModel.getArticle().getViewCount() + bbsUnit);
                 if (!tmpModel.getFiles().isEmpty()) {
-
-                    if (fileList.size()<=1) {
+                    if (fileList.size()==1) {
+                        firstFileWrapper.setVisibility(View.VISIBLE);
                         firstFile.setText(fileList.get(0).getFileName() + "[" + fileList.get(0).getDownloadCount() + "]");
                         firstFileWrapper.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Schema.FILE_DOWNLOAD + fileList.get(0).getFilePath() + "/" + Session.getUserToken(getApplicationContext())))));
-                        secondFileWrapper.setVisibility(View.GONE);
                     } else if(fileList.size()==2) {
-                        firstFile.setText(fileList.get(0).getFileName() + "[" + fileList.get(0).getDownloadCount() + "]");
-                        firstFileWrapper.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Schema.FILE_DOWNLOAD + fileList.get(0).getFilePath() + "/" + Session.getUserToken(getApplicationContext())))));
+                        secondFileWrapper.setVisibility(View.VISIBLE);
                         secondFile.setText(fileList.get(1).getFileName() + "[" + fileList.get(1).getDownloadCount() + "]");
                         secondFileWrapper.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Schema.FILE_DOWNLOAD + fileList.get(1).getFilePath() + "/" + Session.getUserToken(getApplicationContext())))));
                     }
-                } else {
-                    firstFileWrapper.setVisibility(View.GONE);
-                    secondFileWrapper.setVisibility(View.GONE);
                 }
 
                 if(!tmpModel.getComments().isEmpty()){
-
+                    commentWrapper.setVisibility(View.VISIBLE);
                     //fix NestiedScroollView in RecyclerView
                     commentView.setLayoutManager(new NestedInRecyclerManager(getApplicationContext()));
                     commentView.setHasFixedSize(false);
@@ -151,10 +147,7 @@ public class ContentActivity extends AppCompatActivity {
                     BoardCommentAdapter commentAdapter = new BoardCommentAdapter(getApplicationContext(), response.body().getResultData().get(0).getComments());
                     commentView.setAdapter(commentAdapter);
 
-                }else{
-                    commentWrapper.setVisibility(View.GONE);
                 }
-
             }
 
             @Override

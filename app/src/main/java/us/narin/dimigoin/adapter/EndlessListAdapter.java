@@ -25,15 +25,15 @@ public abstract class EndlessListAdapter<T extends RecyclerView.ViewHolder> exte
 
     @Override
     public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder vh;
+        RecyclerView.ViewHolder viewHolder;
         if (viewType == VIEW_TYPE_LOADER) {
             LayoutInflater inflater = LayoutInflater.from(parent.getContext());
             View view = inflater.inflate(R.layout.layout_progress_bar, parent, false);
-            vh = new LoaderViewHolder(view);
+            viewHolder = new LoaderViewHolder(view);
         } else {
-            vh = onCreateContentViewHolder(parent, viewType);
+            viewHolder = onCreateContentViewHolder(parent, viewType);
         }
-        return vh;
+        return viewHolder;
     }
 
     public abstract T onCreateContentViewHolder(ViewGroup parent, int viewType);

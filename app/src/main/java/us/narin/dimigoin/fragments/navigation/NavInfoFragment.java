@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
 import us.narin.dimigoin.R;
 import us.narin.dimigoin.activities.MainActivity;
 import us.narin.dimigoin.adapter.InfoAdapter;
@@ -38,6 +39,9 @@ public class NavInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        ButterKnife.bind(getActivity());
+
         View mView = inflater.inflate(R.layout.fragment_info_nav, container, false);
         mTabLayout = ((MainActivity) getActivity()).mTabLayout;
         mTabLayout.setVisibility(View.VISIBLE);
@@ -54,6 +58,12 @@ public class NavInfoFragment extends Fragment {
             mTabLayout.getTabAt(i).setText(getActivity().getString(tabTitleIds[i]));
 
         return mView;
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        ButterKnife.unbind(getActivity());
     }
 
 

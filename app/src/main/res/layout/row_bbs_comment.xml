@@ -56,15 +56,6 @@
                       android:textColor="#9E9E9E"
                       android:text="asdfasdfasdfasdfdasfasdfdsaf\n\nssafsaasdf"/>
 
-            <TextView android:id="@+id/bbs_comment_reply"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:textColor="@color/colorPrimary"
-                      android:background="#FCE4EC"
-                      android:paddingLeft="5dp"
-                      android:paddingRight="5dp"
-
-                      android:text="답글달기"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,9 +19,9 @@ import butterknife.Bind;
 import com.bumptech.glide.Glide;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import us.narin.dimigoin.R;
+import us.narin.dimigoin.fragments.navigation.MainFragment;
 import us.narin.dimigoin.fragments.navigation.NavCommunityFragment;
 import us.narin.dimigoin.fragments.navigation.NavInfoFragment;
-import us.narin.dimigoin.fragments.navigation.MainFragment;
 import us.narin.dimigoin.fragments.navigation.NavSubmitFragment;
 import us.narin.dimigoin.model.pojo.Login;
 import us.narin.dimigoin.util.Schema;
@@ -72,11 +71,7 @@ public class MainActivity extends AppCompatActivity
         Login login = (Login) getIntent().getSerializableExtra("stdModel");
         Toast.makeText(getApplicationContext(), String.format("%d학년 %d반 %d번 재학생", login.getData().getGrade(), login.getData().getStdClass(), login.getData().getNumber()), Toast.LENGTH_LONG).show();
 
-        View rootView = navigationView.getHeaderView(0);
-        navUserName = (TextView)rootView.findViewById(R.id.nav_user_name);
-        navUserData = (TextView)rootView.findViewById(R.id.nav_user_data);
-        navUserImg = (ImageView)rootView.findViewById(R.id.nav_user_img);
-        navBackground = (ImageView)rootView.findViewById(R.id.nav_bg);
+//        View rootView = navigationView.getHeaderView(0);
 
         Glide.with(this).load(R.drawable.nav_bg).centerCrop().fitCenter().into(navBackground);
         Glide.with(this).load(R.drawable.profile).bitmapTransform(new CropCircleTransformation(getApplicationContext())).into(navUserImg);

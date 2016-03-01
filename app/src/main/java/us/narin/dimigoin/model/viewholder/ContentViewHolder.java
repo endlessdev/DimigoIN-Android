@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import butterknife.Bind;
+import butterknife.BindString;
 import butterknife.ButterKnife;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -38,6 +39,16 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
     Context mContext;
     Schema.BoardIds boardIds;
 
+    @BindString(R.string.bbs_comment)
+    String bbsComment;
+    @BindString(R.string.bbs_like)
+    String bbsLike;
+    @BindString(R.string.bbs_view)
+    String bbsView;
+    @BindString(R.string.bbs_unit)
+    String bbsUnit;
+
+
     public ContentViewHolder(View itemView, Context mContext, Schema.BoardIds boardIds) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -48,11 +59,11 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
     public void bindValue(Content content){
         bbsSubject.setText(content.getContentSubject());
         bbsAuthor.setText(content.getContentAuthor());
-        bbsViewCount.setText("조회수 "+String.valueOf(content.getContentViewCount())+"건");
+        bbsViewCount.setText(bbsView+String.valueOf(content.getContentViewCount())+bbsUnit);
         bbsTime.setText(new TimeStamp(mContext).getTimes(content.getUnixDate()));
-        bbsGoodCount.setText("좋아요 "+String.valueOf(content.getContentGoodCount())+"개");
+        bbsGoodCount.setText(bbsLike+String.valueOf(content.getContentGoodCount())+bbsUnit);
         bbsProfile.setText(String.valueOf(content.getContentAuthor().charAt(0)));
-        bbsCommentCount.setText("댓글 " + String.valueOf(content.getContentCommentCount()) + "건");
+        bbsCommentCount.setText(bbsComment + String.valueOf(content.getContentCommentCount()) + bbsUnit);
 
         bbsContent.setText(br2nl(content.getContentBody()).trim().replaceAll("&nbsp;",""));
 

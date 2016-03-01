@@ -1,18 +1,11 @@
 package us.narin.dimigoin.api;
 
 
-import java.util.List;
-
 import retrofit.Call;
-import retrofit.http.Field;
-import retrofit.http.FormUrlEncoded;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Path;
-import us.narin.dimigoin.model.pojo.BoardList;
-import us.narin.dimigoin.model.pojo.ContentDetail;
-import us.narin.dimigoin.model.pojo.File;
-import us.narin.dimigoin.model.pojo.Login;
+import retrofit.http.*;
+import us.narin.dimigoin.model.pojo.*;
+
+import java.util.List;
 
 public interface ApiRequests {
 
@@ -41,6 +34,14 @@ public interface ApiRequests {
     Call<List<File>> downloadFiles(
             @Path("bf_file") Integer fileType,
             @Path("token") String userToken
+    );
+
+    @POST("/push/register")
+    Call<Result> getResult(
+            @Field("id") String userId,
+            @Field("token") String userToken,
+            @Field("phoneType") Integer phoneType,
+            @Field("deviceId") String deviceId
     );
 
 }

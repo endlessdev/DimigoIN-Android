@@ -20,7 +20,6 @@ public class CustomClock extends TextView {
     Calendar cld;
     private final static String m12 = "kk:mm:ss";
     private final static String m24 = "kk:mm:ss";
-    private FormatChangeObserver mFormatChangeObserver;
 
     private Runnable mTicker;
     private Handler mHandler;
@@ -45,7 +44,7 @@ public class CustomClock extends TextView {
             cld = Calendar.getInstance();
         }
 
-        mFormatChangeObserver = new FormatChangeObserver();
+        FormatChangeObserver mFormatChangeObserver = new FormatChangeObserver();
         context.getContentResolver().registerContentObserver(
                 Settings.System.CONTENT_URI, true, mFormatChangeObserver);
 
@@ -57,17 +56,15 @@ public class CustomClock extends TextView {
         mTickerStopped = false;
         super.onAttachedToWindow();
         mHandler = new Handler();
-        mTicker = new Runnable() {
-            public void run() {
-                if (mTickerStopped)
-                    return;
-                cld.setTimeInMillis(System.currentTimeMillis());
-                setText(DateFormat.format(mFormat, cld));
-                invalidate();
-                long now = SystemClock.uptimeMillis();
-                long next = now + (1000 - now % 1000);
-                mHandler.postAtTime(mTicker, next);
-            }
+        mTicker = () -> {
+            if (mTickerStopped)
+                return;
+            cld.setTimeInMillis(System.currentTimeMillis());
+            setText(DateFormat.format(mFormat, cld));
+            invalidate();
+            long now = SystemClock.uptimeMillis();
+            long next = now + (1000 - now % 1000);
+            mHandler.postAtTime(mTicker, next);
         };
         mTicker.run();
     }

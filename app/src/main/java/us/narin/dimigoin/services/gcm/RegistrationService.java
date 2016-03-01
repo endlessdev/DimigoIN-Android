@@ -1,15 +1,19 @@
 package us.narin.dimigoin.services.gcm;
 
-import android.annotation.SuppressLint;
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import us.narin.dimigoin.api.ApiObject;
+import us.narin.dimigoin.api.ApiRequests;
+import us.narin.dimigoin.model.pojo.Result;
 import us.narin.dimigoin.util.QuickstartPreferences;
+import us.narin.dimigoin.util.Schema;
 import us.narin.dimigoin.util.Session;
 
 import java.io.IOException;
@@ -22,11 +26,6 @@ public class RegistrationService extends IntentService {
         super(TAG);
     }
 
-    /**
-     * GCM을 위한 Instance ID의 토큰을 생성하여 가져온다.
-     * @param intent
-     */
-    @SuppressLint("LongLogTag")
     @Override
     protected void onHandleIntent(Intent intent) {
 
@@ -50,33 +49,28 @@ public class RegistrationService extends IntentService {
 
                 final String finalToken = token;
 
-                new Thread(new Runnable() {
+                ApiRequests apiRequests = ApiObject.initClient();
+                Call<Result> getResult = apiRequests.getResult(
+                        Session.getAccountId(this),
+                        Session.getUserToken(this),
+                        Schema.GCM_REGISTRATION_PHONETYPE,
+                        finalToken
+                );
+
+                getResult.enqueue(new Callback<Result>() {
                     @Override
-                    public void run() {
-                        try {
-
-                            Log.i(TAG, finalToken);
-                            Log.i(TAG, Session.getUserToken(RegistrationService.this));
-                            Log.i(TAG, Session.getAccountId(RegistrationService.this));
-
-                            Document doc = Jsoup.connect("http://app.allabout.kr/push/register")
-                                    .data("id", Session.getAccountId(RegistrationService.this))
-                                    .data("token", Session.getUserToken(RegistrationService.this))
-                                    .data("phoneType", "1")
-                                    .data("deviceId", finalToken)
-                                    .ignoreContentType(true)
-                                    .ignoreHttpErrors(true)
-                                    .post();
-
-                            Log.i(TAG, doc.body().text());
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    public void onResponse(Response<Result> response) {
+                        Log.i(TAG, finalToken);
+                        Log.i(TAG, Session.getUserToken(RegistrationService.this));
+                        Log.i(TAG, Session.getAccountId(RegistrationService.this));
+                        Log.i(TAG, response.body().getMsg());
                     }
-                }).start();
 
-
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.i(TAG, "GCM 등록에 실패했습니다.");
+                    }
+                });
             }
         } catch (IOException e) {
             e.printStackTrace();

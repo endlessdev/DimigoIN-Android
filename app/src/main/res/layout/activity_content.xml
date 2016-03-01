@@ -5,9 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/background_light"
         android:fitsSystemWindows="true"
-
+        android:background="#eeeeee"
 >
 
     <android.support.design.widget.AppBarLayout
@@ -50,7 +49,6 @@
     <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#eeeeee"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_marginBottom="45dp">
 
@@ -165,6 +163,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:padding="10dp"
+                    android:visibility="gone"
                     style="@style/ContentCard">
 
                 <TextView android:id="@+id/bbs_content_detail_file_1"
@@ -184,6 +183,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
+                    android:visibility="gone"
                     style="@style/ContentCard">
 
                 <TextView android:id="@+id/bbs_content_detail_file_2"
@@ -198,6 +198,7 @@
 
             <android.support.v7.widget.CardView
                     android:id="@+id/bbs_content_detail_comment_wrappper"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -230,23 +231,24 @@
                   android:layout_height="45dp"
                   android:layout_gravity="bottom"
                   android:orientation="horizontal"
-                  >
+    >
 
         <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" style="@style/ContentCard">
+                android:layout_height="match_parent" style="@style/ContentCard"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="-5dp">
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="match_parent"
-                          android:orientation="horizontal"
-                          android:layout_marginLeft="10dp"
-                          android:layout_marginRight="10dp">
+                          android:orientation="horizontal">
 
                 <EditText android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_weight="90"
                           android:hint="@string/comment_edittext_hint"/>
 
-                <Button android:layout_width="75dp"
+                <Button android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:textColor="@color/colorAccent"

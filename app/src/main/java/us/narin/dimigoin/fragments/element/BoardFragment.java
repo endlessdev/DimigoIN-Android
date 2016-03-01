@@ -61,6 +61,7 @@ public class BoardFragment extends Fragment {
             getBoardList(currentPage);
             Log.d("BoardFragment " + boardIds.toString(), "onRefresh()");
         });
+        refreshBoard.setColorSchemeResources(R.color.colorAccent);
 
 
         mRecyclerView.addOnScrollListener(new EndlessScrollListener(linearLayoutManager) {

@@ -8,11 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.Bind;
 import us.narin.dimigoin.R;
 import us.narin.dimigoin.activities.MainActivity;
 import us.narin.dimigoin.util.CustomClock;
 
 public class MainFragment extends Fragment {
+
+    @Bind(R.id.main_clock)
+    CustomClock mCustomClock;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -22,7 +26,6 @@ public class MainFragment extends Fragment {
         TabLayout tabLayout = ((MainActivity)getActivity()).mTabLayout;
         tabLayout.setVisibility(View.GONE);
 
-        CustomClock mCustomClock = (CustomClock)mView.findViewById(R.id.main_clock);
         mCustomClock.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Roboto-Thin.ttf"));
 
         return mView;

@@ -8,14 +8,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.ImageView;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.dd.processbutton.ProcessButton;
-import com.dd.processbutton.iml.ActionProcessButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import retrofit.Call;
@@ -33,21 +30,20 @@ import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private AutoCompleteTextView accountField;
-    private EditText passwordField;
-    private ProcessButton signInBtn;
+    @Bind(R.id.email)
+    AutoCompleteTextView accountField;
+    @Bind(R.id.password)
+    EditText passwordField;
+    @Bind(R.id.sign_in_button)
+    ProcessButton signInBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Glide.with(getApplicationContext()).load(R.drawable.login_bg).diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().bitmapTransform(new GrayscaleTransformation(getApplicationContext())).into((ImageView) findViewById(R.id.login_main_bg));
+        ButterKnife.bind(this);
 
-        accountField = (AutoCompleteTextView) findViewById(R.id.email);
-        passwordField = (EditText) findViewById(R.id.password);
-
-        signInBtn = (ActionProcessButton) findViewById(R.id.sign_in_button);
         signInBtn.setOnClickListener(view -> {
             signInBtn.setProgress(50);
             final String userId = accountField.getText().toString();
