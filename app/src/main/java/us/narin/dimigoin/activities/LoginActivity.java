@@ -8,11 +8,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dd.processbutton.ProcessButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import retrofit.Call;
@@ -36,13 +40,16 @@ public class LoginActivity extends AppCompatActivity {
     EditText passwordField;
     @Bind(R.id.sign_in_button)
     ProcessButton signInBtn;
-
+    @Bind(R.id.login_main_bg)
+    ImageView loginBackground;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
+
+        Glide.with(getApplicationContext()).load(R.drawable.login_bg).diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().bitmapTransform(new GrayscaleTransformation(getApplicationContext())).into(loginBackground);
 
         signInBtn.setOnClickListener(view -> {
             signInBtn.setProgress(50);
@@ -51,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
             setEnabled(false);
 
-            ApiRequests apiRequests = ApiObject.initClient();
+            ApiRequests apiRequests = ApiObject.initClient(Schema.API_ENDPOINT);
             Call<Login> callLogin = apiRequests.apiLogin(userId, userPw);
             if (isConnectionAvailable()) {
                 callLogin.enqueue(new Callback<Login>() {
@@ -102,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-            }else {
+            } else {
                 signInBtn.setErrorText(getString(R.string.login_failed_network_msg));
                 setEnabled(true);
             }
@@ -111,9 +118,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setEnabled(boolean isEnabled) {
-            accountField.setEnabled(isEnabled);
-            passwordField.setEnabled(isEnabled);
-            signInBtn.setEnabled(isEnabled);
+        accountField.setEnabled(isEnabled);
+        passwordField.setEnabled(isEnabled);
+        signInBtn.setEnabled(isEnabled);
     }
 
     private void getInstanceIdToken() {

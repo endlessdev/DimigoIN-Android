@@ -12,7 +12,6 @@ import retrofit.Response;
 import us.narin.dimigoin.api.ApiObject;
 import us.narin.dimigoin.api.ApiRequests;
 import us.narin.dimigoin.model.pojo.Result;
-import us.narin.dimigoin.util.QuickstartPreferences;
 import us.narin.dimigoin.util.Schema;
 import us.narin.dimigoin.util.Session;
 
@@ -31,7 +30,7 @@ public class RegistrationService extends IntentService {
 
         // GCM Instance ID의 토큰을 가져오는 작업이 시작되면 LocalBoardcast로 GENERATING 액션을 알려 ProgressBar가 동작하도록 한다.
         LocalBroadcastManager.getInstance(this)
-                .sendBroadcast(new Intent(QuickstartPreferences.REGISTRATION_GENERATING));
+                .sendBroadcast(new Intent(Schema.REGISTRATION_GENERATING));
 
         // GCM을 위한 Instance ID를 가져온다.
         InstanceID instanceID = InstanceID.getInstance(this);
@@ -49,7 +48,7 @@ public class RegistrationService extends IntentService {
 
                 final String finalToken = token;
 
-                ApiRequests apiRequests = ApiObject.initClient();
+                ApiRequests apiRequests = ApiObject.initClient(Schema.API_ENDPOINT);
                 Call<Result> getResult = apiRequests.getResult(
                         Session.getAccountId(this),
                         Session.getUserToken(this),
@@ -78,7 +77,7 @@ public class RegistrationService extends IntentService {
 
         // GCM Instance ID에 해당하는 토큰을 획득하면 LocalBoardcast에 COMPLETE 액션을 알린다.
         // 이때 토큰을 함께 넘겨주어서 UI에 토큰 정보를 활용할 수 있도록 했다.
-        Intent registrationComplete = new Intent(QuickstartPreferences.REGISTRATION_COMPLETE);
+        Intent registrationComplete = new Intent(Schema.REGISTRATION_COMPLETE);
         registrationComplete.putExtra("token", token);
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }

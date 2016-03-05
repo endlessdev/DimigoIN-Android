@@ -12,7 +12,7 @@ public class Session {
     static SharedPreferences.Editor editor;
 
     public static void saveAccount(Context mContext, String userId, String userPw, String userToken, String userCookie) {
-        pref = mContext.getSharedPreferences("us.narin.dimigoin.app", Context.MODE_PRIVATE);
+        pref = mContext.getSharedPreferences(Schema.PACKAGE_TAG, Context.MODE_PRIVATE);
         editor  = pref.edit();
         editor.putString("userId", userId).apply();
         editor.putString("userPw", userPw).apply();
@@ -22,19 +22,20 @@ public class Session {
     }
 
     public static String getAccountId(Context mContext){
-        return mContext.getSharedPreferences("us.narin.dimigoin.app", Context.MODE_PRIVATE).getString("userId", "");
+        return mContext.getSharedPreferences(Schema.PACKAGE_TAG, Context.MODE_PRIVATE).getString("userId", "");
     }
 
-    public static String getAccountPW(Context mContext){
-        return mContext.getSharedPreferences("us.narin.dimigoin.app", Context.MODE_PRIVATE).getString("userPw", "");
-    }
+//    Warning! this method is unsafe. please using encrypt.
+//    public static String getAccountPW(Context mContext){
+//        return mContext.getSharedPreferences(Schema.PACKAGE_TAG, Context.MODE_PRIVATE).getString("userPw", "");
+//    }
 
     public static String getUserToken(Context mContext){
-        return mContext.getSharedPreferences("us.narin.dimigoin.app", Context.MODE_PRIVATE).getString("userToken", "");
+        return mContext.getSharedPreferences(Schema.PACKAGE_TAG, Context.MODE_PRIVATE).getString("userToken", "");
     }
 
     public static String getUserCookie(Context mContext){
-        return mContext.getSharedPreferences("us.narin.dimigoin.app", Context.MODE_PRIVATE).getString("userCookie", "");
+        return mContext.getSharedPreferences(Schema.PACKAGE_TAG, Context.MODE_PRIVATE).getString("userCookie", "");
     }
 
 }

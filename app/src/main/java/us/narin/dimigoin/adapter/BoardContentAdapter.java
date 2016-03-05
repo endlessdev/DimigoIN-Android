@@ -19,8 +19,6 @@ public class BoardContentAdapter extends RecyclerView.Adapter<ContentViewHolder>
     Schema.BoardIds boardIds;
     Context mContext;
 
-
-
     public BoardContentAdapter(Context mContext, Schema.BoardIds boardIds, List<Content> contentList){
         this.contentList = contentList;
         this.boardIds = boardIds;

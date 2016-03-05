@@ -12,10 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import butterknife.Bind;
 import com.bumptech.glide.Glide;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import us.narin.dimigoin.R;
@@ -32,23 +32,18 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAG = "MainActivity";
 
+    private static final String userDataFormat = "%d학년 %d반 %d번 재학생";
+
     public TabLayout mTabLayout;
     public Toolbar toolbar;
-
-    @Bind(R.id.nav_user_name)
-    TextView navUserName;
-
-    @Bind(R.id.nav_user_data)
-    TextView navUserData;
-    @Bind(R.id.nav_user_img)
-    ImageView navUserImg;
-    @Bind(R.id.nav_bg)
-    ImageView navBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -69,15 +64,20 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         Login login = (Login) getIntent().getSerializableExtra("stdModel");
-        Toast.makeText(getApplicationContext(), String.format("%d학년 %d반 %d번 재학생", login.getData().getGrade(), login.getData().getStdClass(), login.getData().getNumber()), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), String.format(userDataFormat, login.getData().getGrade(), login.getData().getStdClass(), login.getData().getNumber()), Toast.LENGTH_LONG).show();
 
-//        View rootView = navigationView.getHeaderView(0);
+        final View navRootView = navigationView.getHeaderView(0);
+
+        final TextView navUserName = (TextView)navRootView.findViewById(R.id.nav_user_name);
+        final TextView navUserData = (TextView)navRootView.findViewById(R.id.nav_user_data);
+        final ImageView navUserImg = (ImageView)navRootView.findViewById(R.id.nav_user_img);
+        final ImageView navBackground = (ImageView)navRootView.findViewById(R.id.nav_bg);
 
         Glide.with(this).load(R.drawable.nav_bg).centerCrop().fitCenter().into(navBackground);
         Glide.with(this).load(R.drawable.profile).bitmapTransform(new CropCircleTransformation(getApplicationContext())).into(navUserImg);
 
         navUserName.setText(String.format("%s(%s)", login.getData().getName(), Session.getAccountId(getApplicationContext())));
-        navUserData.setText(String.format("%d학년 %d반 %d번 재학생", login.getData().getGrade(), login.getData().getStdClass(), login.getData().getNumber()));
+        navUserData.setText(String.format(userDataFormat, login.getData().getGrade(), login.getData().getStdClass(), login.getData().getNumber()));
 
         setFragment(Schema.TransactionFrag.HOME);
 

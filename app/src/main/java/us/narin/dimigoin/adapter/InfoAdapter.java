@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import us.narin.dimigoin.fragments.element.BoardFragment;
+import us.narin.dimigoin.fragments.element.MealFragment;
 import us.narin.dimigoin.util.Schema;
 
 /**
@@ -31,7 +32,7 @@ public class InfoAdapter extends FragmentPagerAdapter {
             case 1:
                 return new BoardFragment(Schema.BoardIds.FREE);
             case 2:
-                return new BoardFragment(Schema.BoardIds.KNOWLEDGE);
+                return new MealFragment();
             case 3:
                 return new BoardFragment(Schema.BoardIds.CONTEST_INFO);
             case 4:

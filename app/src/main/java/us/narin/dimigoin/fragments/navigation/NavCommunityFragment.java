@@ -37,12 +37,16 @@ public class NavCommunityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ButterKnife.bind(getActivity());
+
 
         View mView = inflater.inflate(R.layout.fragment_community_nav, container, false);
+
+        ButterKnife.bind(this, mView);
+
         TabLayout mTabLayout = ((MainActivity) getActivity()).mTabLayout;
         mTabLayout.setVisibility(View.VISIBLE);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
 
         mViewPager.setAdapter(new BoardAdapter(fragmentManager, getActivity()));
 

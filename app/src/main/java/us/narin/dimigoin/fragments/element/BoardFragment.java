@@ -80,7 +80,7 @@ public class BoardFragment extends Fragment {
 
         final List<Content> retModel = new ArrayList<>();
 
-        ApiRequests apiRequests = ApiObject.initClient();
+        ApiRequests apiRequests = ApiObject.initClient(Schema.API_ENDPOINT);
         Call<BoardList> callBBSList = apiRequests.getBoardList(boardIds.toString(), boardPage, Session.getUserToken(getActivity()));
         callBBSList.enqueue(new Callback<BoardList>() {
             @Override

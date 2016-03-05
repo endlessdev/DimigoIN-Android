@@ -43,5 +43,4 @@ public interface ApiRequests {
             @Field("phoneType") Integer phoneType,
             @Field("deviceId") String deviceId
     );
-
 }

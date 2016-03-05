@@ -243,15 +243,21 @@
                           android:layout_height="match_parent"
                           android:orientation="horizontal">
 
-                <EditText android:layout_width="match_parent"
+                <EditText android:id="@+id/bbs_content_detail_comment_field"
+                          android:layout_width="match_parent"
                           android:layout_height="wrap_content"
                           android:layout_weight="90"
-                          android:hint="@string/comment_edittext_hint"/>
+                          android:background="@android:color/transparent"
+                          android:hint="@string/comment_edittext_hint"
+                          android:padding="10dp"
+                          android:windowSoftInputMode="adjustResize"/>
 
-                <Button android:layout_width="65dp"
+                <Button android:id="@+id/bbs_content_detail_comment_submit"
+                        android:layout_width="65dp"
                         android:layout_height="wrap_content"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        android:textColor="@color/colorAccent"
+                        style="@style/Widget.AppCompat.Button"
+                        android:background="@color/colorAccent"
+                        android:textColor="@android:color/white"
                         android:textStyle="bold"
                         android:text="@string/comment_botton_text"/>
 
