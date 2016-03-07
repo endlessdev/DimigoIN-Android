@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import us.narin.dimigoin.R;
 import us.narin.dimigoin.activities.MainActivity;
 import us.narin.dimigoin.adapter.SubmitAdapter;
@@ -31,6 +32,9 @@ public class NavSubmitFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_submit_nav, container, false);
+
+        ButterKnife.bind(this, mView);
+
         mTabLayout = ((MainActivity) getActivity()).mTabLayout;
         mTabLayout.setVisibility(View.VISIBLE);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);

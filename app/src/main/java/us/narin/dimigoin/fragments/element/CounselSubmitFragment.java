@@ -14,8 +14,13 @@ import us.narin.dimigoin.util.Schema;
 import us.narin.dimigoin.util.Session;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CounselSubmitFragment extends Fragment {
+
+    private static final String TAG = "CounselSubmitFragment";
 
 
     @Override
@@ -25,15 +30,21 @@ public class CounselSubmitFragment extends Fragment {
 
         Button submitBtn = (Button) mView.findViewById(R.id.counsel_test_btn);
         submitBtn.setOnClickListener(v -> new Thread(() -> {
+
+            final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
+            Calendar mCalendar = Calendar.getInstance();
+            mCalendar.setTime(new Date());
+            mCalendar.add(Calendar.DATE, 2);
+
+
             try {
-                Document doc = Jsoup.connect("http://mento.jeje.pe.kr/request_do.php")
+                Document doc = Jsoup.connect("http://counsel."+Schema.HOST+"/request_do.php")
                         .cookie(Schema.LOGIN_COOKIE_KEY, Session.getUserCookie(getActivity()))
-                        .data("date", "2016-01-06")
+                        .data("category", "1")
                         .data("schedule", "1")
-                        .data("teacherno", "1")
                         .post();
 
-                Log.d("신청", doc.body().text());
+                Log.d(TAG, doc.body().text());
 
             } catch (IOException e) {
                 e.printStackTrace();

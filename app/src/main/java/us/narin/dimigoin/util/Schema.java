@@ -15,7 +15,7 @@ public class Schema {
     public static final String LOGIN_WEB_PARAM_PW = "mb_password";
     public static final String LOGIN_COOKIE_KEY = "PHPSESSID";
 
-    public static final String WEBVIEW_DEFAULT_STYLE = "<body style=\"margin: 0; padding: 0; color:#626262;\"><style>img{display: inline; height: auto; max-width: 100%;}</style><style>iframe{display: inline; height: auto; max-width: 100%;}</style>";
+    public static final String WEBVIEW_DEFAULT_STYLE = "<body style=\"margin: 0; padding: 0; color:#626262;\"><style>img{display: inline; width: 100%; height: auto; max-width: 100%;}</style><style>iframe{display: inline; height: auto; max-width: 100%;}</style>";
     public static final String WEBVIEW_DEFAULT_TYPE = "text/html; charset=UTF-8";
 
     public static final String REGISTRATION_READY = "registrationReady";

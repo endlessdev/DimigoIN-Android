@@ -23,7 +23,7 @@
               android:layout_height="1px"
               android:layout_marginTop="10dp"
               android:layout_marginBottom="10dp"
-              android:background="@color/summary_text"/>
+              android:background="#e0e0e0"/>
 
         <LinearLayout android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
@@ -79,7 +79,8 @@
                   android:layout_height="wrap_content"
                   android:layout_marginTop="10dp"
                   android:text="asdf"
-                  android:maxLines="10"/>
+                  android:maxLines="3"
+                  android:ellipsize="end"/>
 
         <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
 
@@ -138,46 +139,78 @@
         <View android:layout_width="match_parent"
               android:layout_height="1px"
               android:layout_marginTop="10dp"
-              android:background="#eee"/>
+              android:background="#e0e0e0"/>
 
         <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
+                      android:layout_height="25dp"
                       android:orientation="horizontal"
                       android:layout_marginTop="10dp"
                       android:layout_weight="3">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="11dp"
-                    android:textStyle="bold"
-                    android:text="좋아요"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:gravity="center"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:textColor="@color/summary_text"
-                    android:textSize="11dp"
-                    android:text="댓글작성"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
+                <ImageView android:layout_width="12dp"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/ic_thumb_up_black_48dp"
+                android:layout_marginRight="2dp"/>
 
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="11dp"
+                        android:textStyle="bold"
+                        android:text="좋아요"
+                />
+            </LinearLayout>
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/summary_text"
-                    android:text="더 보기"
-                    android:textSize="11dp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:layout_weight="1"/>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:gravity="center"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
+
+                <ImageView android:layout_width="12dp"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/ic_forum_black_48dp"
+                           android:layout_marginRight="2dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:textSize="11dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/summary_text"
+                        android:text="댓글작성"
+                />
+            </LinearLayout>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:gravity="center"
+                          android:layout_weight="1"
+                          android:orientation="horizontal">
+
+                <ImageView android:layout_width="12dp"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/ic_visibility_black_48dp"
+                           android:layout_marginRight="2dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/summary_text"
+                        android:textSize="11dp"
+                        android:textStyle="bold"
+                        android:text="더 보기"
+                />
+            </LinearLayout>
 
 
         </LinearLayout>

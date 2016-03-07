@@ -140,8 +140,6 @@ public class ContentActivity extends AppCompatActivity {
                 contentTime.setText(new TimeStamp(getApplicationContext()).getTimes(tmpModel.getArticle().getPostTime()));
                 contentProfile.setText(String.valueOf(tmpModel.getArticle().getAuthorName().charAt(0)));
 
-
-
                 likeCount.setText(bbsLike + tmpModel.getArticle().getGoodCount() + bbsUnit);
                 commentCount.setText(bbsComment + tmpModel.getComments().size() + bbsUnit);
                 viewCount.setText(bbsView + tmpModel.getArticle().getViewCount() + bbsUnit);
