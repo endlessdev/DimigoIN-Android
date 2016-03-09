@@ -37,6 +37,7 @@ public class BoardContentAdapter extends RecyclerView.Adapter<ContentViewHolder>
         final Content content = contentList.get(position);
         holder.bindValue(content);
 
+
     }
 
     @Override

@@ -81,9 +81,7 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
 
         if (!photoList.isEmpty()) {
 
-            contentImages.setPageMargin(-35);
             contentImages.setAdapter(new PhotoAdapter(getPhotoList(content.getContentBody()), mContext));
-            contentImages.setOffscreenPageLimit(1);
             contentIndicator.setViewPager(contentImages);
 
             if (photoList.size() == 1) {

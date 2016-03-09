@@ -52,4 +52,5 @@ public class PhotoAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((ImageView)object);
     }
+
 }
