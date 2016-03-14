@@ -104,8 +104,6 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
     }
 
     private String replaceWhiteSpace(String html) {
-        if (html == null)
-            return html;
         Document document = Jsoup.parse(html);
         document.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
         document.select("br").append("\\n");

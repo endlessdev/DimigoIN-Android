@@ -8,12 +8,16 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import us.narin.dimigoin.R;
 import us.narin.dimigoin.activities.MainActivity;
 import us.narin.dimigoin.adapter.BoardAdapter;
+import us.narin.dimigoin.fragments.element.BoardFragment;
+import us.narin.dimigoin.util.Schema;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NavCommunityFragment extends Fragment {
 
@@ -24,6 +28,15 @@ public class NavCommunityFragment extends Fragment {
             R.string.tab_name_community_laf,
             R.string.tab_name_community_suggest
     };
+
+    private Schema.BoardIds[] boardIds = {
+            Schema.BoardIds.FILE,
+            Schema.BoardIds.FREE,
+            Schema.BoardIds.KNOWLEDGE,
+            Schema.BoardIds.LOSTANDFOUND,
+            Schema.BoardIds.SUGGEST,
+    };
+
     private FragmentManager fragmentManager;
 
     @Bind(R.id.fragment_comunity_vp)
@@ -38,7 +51,6 @@ public class NavCommunityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
         View mView = inflater.inflate(R.layout.fragment_community_nav, container, false);
 
         ButterKnife.bind(this, mView);
@@ -48,12 +60,18 @@ public class NavCommunityFragment extends Fragment {
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
 
-        mViewPager.setAdapter(new BoardAdapter(fragmentManager, getActivity()));
+
+        final List<Fragment> fragmentList = new ArrayList<>();
+
+        for (Schema.BoardIds element : boardIds) {
+            fragmentList.add(new BoardFragment(element));
+        }
+
+        mViewPager.setAdapter(new BoardAdapter(fragmentManager, getActivity(), fragmentList));
 
         mTabLayout.setupWithViewPager(mViewPager);
 
-        for (int i = 0; i < tabTitleIds.length; i++)
-            mTabLayout.getTabAt(i).setText(getActivity().getString(tabTitleIds[i]));
+        setTabsTitle(mTabLayout);
 
         return mView;
     }
@@ -62,5 +80,15 @@ public class NavCommunityFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+
+    private void setTabsTitle(TabLayout mTabLayout) {
+        for (int i = 0; i < tabTitleIds.length; i++) {
+            final String tabTitle = getActivity().getString(tabTitleIds[i]);
+            final TabLayout.Tab tab = mTabLayout.getTabAt(i);
+            assert tab != null;
+            tab.setText(tabTitle);
+        }
+
     }
 }

@@ -13,10 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
@@ -30,6 +27,8 @@ import us.narin.dimigoin.R;
 import us.narin.dimigoin.adapter.BoardCommentAdapter;
 import us.narin.dimigoin.api.ApiObject;
 import us.narin.dimigoin.api.ApiRequests;
+import us.narin.dimigoin.model.pojo.Article;
+import us.narin.dimigoin.model.pojo.Comment;
 import us.narin.dimigoin.model.pojo.ContentDetail;
 import us.narin.dimigoin.model.pojo.File;
 import us.narin.dimigoin.util.NestedInRecyclerManager;
@@ -38,6 +37,7 @@ import us.narin.dimigoin.util.Session;
 import us.narin.dimigoin.util.TimeStamp;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 public class ContentActivity extends AppCompatActivity {
@@ -115,13 +115,11 @@ public class ContentActivity extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        final WebSettings webSettings = contentView.getSettings();
-//        webSettings.setJavaScriptEnabled(true);
+        WebSettings webSettings = contentView.getSettings();
 
         contentView.setBackgroundColor(0);
         contentView.setLongClickable(false);
         webSettings.setDefaultFontSize(14);
-//        webSettings.setDomStorageEnabled(true);
 
         ApiRequests apiRequests = ApiObject.initClient(Schema.API_ENDPOINT);
         Call<ContentDetail> callDetail = apiRequests.getContentDetail(boardId, contentId, userToken);
@@ -130,30 +128,40 @@ public class ContentActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Response<ContentDetail> response) {
+
+                List<ContentDetail.Data> responseResultData  = response.body().getResultData();
+
                 //JSON 응답 (타입오류)의 이상으로 제일 첫번째의 데이터를 가져옵니다.
-                final ContentDetail.Data tmpModel = response.body().getResultData().get(0);
-                final List<File> fileList = response.body().getResultData().get(0).getFiles();
-                final String curruntTime = new TimeStamp(getApplicationContext()).getTimes(tmpModel.getArticle().getPostTime());
-                final char authorLastName = tmpModel.getArticle().getAuthorName().charAt(0);
-                final BoardCommentAdapter commentAdapter = new BoardCommentAdapter(getApplicationContext(), response.body().getResultData().get(0).getComments());
+                ContentDetail.Data responseData = responseResultData.get(0);
 
-                contentView.loadData(Schema.WEBVIEW_DEFAULT_STYLE + tmpModel.getArticle().getContentBody(), Schema.WEBVIEW_DEFAULT_TYPE, null);
+                List<File> fileList = responseData.getFiles();
+                List<Comment> commentList = responseData.getComments();
+                Article responseArticle = responseData.getArticle();
 
-                contentAuthor.setText(tmpModel.getArticle().getAuthorName());
+                Date postTimeStamp = responseArticle.getPostTime();
+
+                String curruntTime = new TimeStamp(getApplicationContext()).getTimes(postTimeStamp);
+                BoardCommentAdapter commentAdapter = new BoardCommentAdapter(getApplicationContext(), commentList);
+
+                char authorLastName = responseArticle.getAuthorName().charAt(0);
+
+                contentView.loadData(Schema.WEBVIEW_DEFAULT_STYLE + responseArticle.getContentBody(), Schema.WEBVIEW_DEFAULT_TYPE, null);
+
+                contentAuthor.setText(responseArticle.getAuthorName());
 
                 contentTime.setText(curruntTime);
                 contentProfile.setText(String.valueOf(authorLastName));
 
-                likeCount.setText(bbsLike + tmpModel.getArticle().getGoodCount() + bbsUnit);
-                commentCount.setText(bbsComment + tmpModel.getComments().size() + bbsUnit);
-                viewCount.setText(bbsView + tmpModel.getArticle().getViewCount() + bbsUnit);
+                likeCount.setText(bbsLike + responseArticle.getGoodCount() + bbsUnit);
+                commentCount.setText(bbsComment + commentList.size() + bbsUnit);
+                viewCount.setText(bbsView + responseArticle.getViewCount() + bbsUnit);
 
 
-                if (!tmpModel.getFiles().isEmpty()) {
+                if (!fileList.isEmpty()) {
                     setFileVisibillity(fileList);
                 }
 
-                if (!tmpModel.getComments().isEmpty()) {
+                if (!commentList.isEmpty()) {
                     setWhenHasComments(commentAdapter);
                 }
             }
@@ -187,9 +195,9 @@ public class ContentActivity extends AppCompatActivity {
                     .data("bo_table", boardTable).method(Connection.Method.POST)
                     .execute();
             if (response.statusCode() == 200) {
-                Log.d(TAG, response.body());
+                Toast.makeText(getApplicationContext(), "댓글 작성 성공", Toast.LENGTH_LONG).show();
             } else {
-                Log.d(TAG, "failed");
+                Toast.makeText(getApplicationContext(), "댓글 작성 실패", Toast.LENGTH_LONG).show();
             }
 
             Log.d(TAG, response.body());
@@ -199,14 +207,17 @@ public class ContentActivity extends AppCompatActivity {
     }
 
     private void setFileVisibillity(List<File> fileList) {
+
         if (fileList.size() == 1) {
             firstFileWrapper.setVisibility(View.VISIBLE);
             firstFile.setText(fileList.get(0).getFileName() + "[" + fileList.get(0).getDownloadCount() + "]");
-            firstFileWrapper.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Schema.FILE_DOWNLOAD + fileList.get(0).getFilePath() + "/" + Session.getUserToken(getApplicationContext())))));
+            firstFileWrapper.setOnClickListener(v ->
+                    startActivity(downloadFile(fileList.get(0).getFilePath())));
         } else if (fileList.size() == 2) {
             secondFileWrapper.setVisibility(View.VISIBLE);
             secondFile.setText(fileList.get(1).getFileName() + "[" + fileList.get(1).getDownloadCount() + "]");
-            secondFileWrapper.setOnClickListener(v -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Schema.FILE_DOWNLOAD + fileList.get(1).getFilePath() + "/" + Session.getUserToken(getApplicationContext())))));
+            secondFileWrapper.setOnClickListener(v ->
+                    startActivity(downloadFile(fileList.get(1).getFilePath())));
         }
     }
 
@@ -218,5 +229,10 @@ public class ContentActivity extends AppCompatActivity {
         commentView.setNestedScrollingEnabled(false);
         commentView.setAdapter(commentAdapter);
 
+    }
+
+    private Intent downloadFile(String filePath){
+        String fileUrl = Schema.FILE_DOWNLOAD + filePath + "/" + Session.getUserToken(getApplicationContext());
+        return new Intent(Intent.ACTION_VIEW, Uri.parse(fileUrl));
     }
 }

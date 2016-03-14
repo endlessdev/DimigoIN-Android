@@ -35,17 +35,18 @@ public class BoardFragment extends Fragment {
     private List<Content> boardList;
     private SwipeRefreshLayout refreshBoard;
 
-    public BoardFragment(Schema.BoardIds boardIds) {
+    public BoardFragment(Schema.BoardIds boardIds){
         this.boardIds = boardIds;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View mView = inflater.inflate(R.layout.fragment_community, container, false);
 
         final RecyclerView mRecyclerView = (RecyclerView) mView.findViewById(R.id.bbs_contents_list);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
@@ -106,4 +107,8 @@ public class BoardFragment extends Fragment {
         return retModel;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }
