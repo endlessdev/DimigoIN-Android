@@ -49,7 +49,7 @@ public class RegistrationService extends IntentService {
                 final String finalToken = token;
 
                 ApiRequests apiRequests = ApiObject.initClient(Schema.API_ENDPOINT);
-                Call<Result> getResult = apiRequests.getResult(
+                Call<Result> getResult = apiRequests.getRegisterResult(
                         Session.getAccountId(this),
                         Session.getUserToken(this),
                         Schema.GCM_REGISTRATION_PHONETYPE,

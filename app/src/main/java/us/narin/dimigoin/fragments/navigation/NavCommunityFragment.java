@@ -1,6 +1,8 @@
 package us.narin.dimigoin.fragments.navigation;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import us.narin.dimigoin.R;
+import us.narin.dimigoin.activities.EditorActivity;
 import us.narin.dimigoin.activities.MainActivity;
 import us.narin.dimigoin.adapter.BoardAdapter;
 import us.narin.dimigoin.fragments.element.BoardFragment;
@@ -42,6 +45,9 @@ public class NavCommunityFragment extends Fragment {
     @Bind(R.id.fragment_comunity_vp)
     ViewPager mViewPager;
 
+    @Bind(R.id.community_fab)
+    FloatingActionButton writorBtn;
+
     public NavCommunityFragment(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
@@ -59,8 +65,6 @@ public class NavCommunityFragment extends Fragment {
         mTabLayout.setVisibility(View.VISIBLE);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-
-
         final List<Fragment> fragmentList = new ArrayList<>();
 
         for (Schema.BoardIds element : boardIds) {
@@ -72,6 +76,8 @@ public class NavCommunityFragment extends Fragment {
         mTabLayout.setupWithViewPager(mViewPager);
 
         setTabsTitle(mTabLayout);
+
+        writorBtn.setOnClickListener(v -> startActivity(new Intent(getActivity(), EditorActivity.class)));
 
         return mView;
     }

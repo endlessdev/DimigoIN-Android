@@ -4,217 +4,195 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         style="@style/ContentCard">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:orientation="vertical"
-                  android:padding="10dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:orientation="vertical">
 
-        <TextView android:id="@+id/bbs_content_subject"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:textStyle="bold"
-                  android:textColor="@color/accent_text"/>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical"
+                      android:padding="10dp">
 
-        <View android:layout_width="match_parent"
-              android:layout_height="1px"
-              android:layout_marginTop="10dp"
-              android:layout_marginBottom="10dp"
-              android:background="#e0e0e0"/>
-
-        <LinearLayout android:layout_width="wrap_content"
+            <TextView android:id="@+id/bbs_content_subject"
+                      android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:orientation="horizontal">
+                      android:textStyle="bold"
+                      android:textColor="@color/accent_text"/>
 
-            <Button android:id="@+id/bbs_content_profile"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/circle_profile"
-                    android:textColor="#E91E63"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    style="?android:attr/borderlessButtonStyle"
-            />
+            <View android:layout_width="match_parent"
+                  android:layout_height="1px"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginBottom="10dp"
+                  android:background="#e0e0e0"/>
+
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal">
+
+                <Button android:id="@+id/bbs_content_profile"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/circle_profile"
+                        android:textColor="#E91E63"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        style="?android:attr/borderlessButtonStyle"
+                />
+
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:orientation="vertical"
+                              android:layout_gravity="center_vertical">
+
+                    <TextView android:id="@+id/bbs_content_author"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textStyle="bold"
+                              android:textColor="#212121"
+                              android:text="정희범"/>
+
+
+                    <TextView android:id="@+id/bbs_content_date"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#9E9E9E"
+                              android:text="1분전"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView android:id="@+id/bbs_content_content"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:text="asdf"
+                      android:maxLines="10"
+                      android:ellipsize="end"/>
+
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+
+                <android.support.v4.view.ViewPager
+                        android:id="@+id/contentImages"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="-20dp"
+                        android:paddingLeft="-20dp"/>
+
+                <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/indicator_default"
+                        android:gravity="bottom|center"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:ci_drawable="@drawable/indicator_radius"/>
+
+            </RelativeLayout>
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
-                          android:orientation="vertical"
-                          android:layout_gravity="center_vertical">
+                          android:orientation="horizontal"
+                          android:layout_marginTop="10dp">
 
-                <TextView android:id="@+id/bbs_content_author"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:textStyle="bold"
-                          android:textColor="#212121"
-                          android:text="정희범"/>
+                <TextView
+                        android:id="@+id/bbs_content_good_count"
+                        style="@style/ContentCountText"/>
+
+                <TextView android:id="@+id/bbs_content_comment_count"
+                          style="@style/ContentCountText"/>
 
 
-                <TextView android:id="@+id/bbs_content_date"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:textColor="#9E9E9E"
-                          android:text="1분전"/>
+                <TextView
+                        android:id="@+id/bbs_content_view_count"
+                        style="@style/ContentCountText"/>
+
 
             </LinearLayout>
 
         </LinearLayout>
-
-
-        <!--<WebView-->
-        <!--android:id="@+id/bbs_content_content"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:scrollbars="none"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:focusableInTouchMode="false"-->
-        <!--android:focusable="false"/>-->
-
-        <TextView android:id="@+id/bbs_content_content"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="10dp"
-                  android:text="asdf"
-                  android:maxLines="3"
-                  android:ellipsize="end"/>
-
-        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-
-            <android.support.v4.view.ViewPager
-                    android:id="@+id/contentImages"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="-10dp"
-                    android:layout_marginLeft="-10dp"/>
-
-            <me.relex.circleindicator.CircleIndicator
-                    android:id="@+id/indicator_default"
-                    android:gravity="bottom|center"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    app:ci_drawable="@drawable/indicator_radius"/>
-
-        </RelativeLayout>
 
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="wrap_content"
-                      android:orientation="horizontal"
-                      android:layout_marginTop="10dp">
+                      android:orientation="vertical"
+                      android:background="#F5F5F5">
 
-            <TextView
-                    android:id="@+id/bbs_content_good_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
-                    android:textColor="@color/summary_text"
-                    android:textSize="11dp"
-                    android:textStyle="bold"
-                    android:text="댓글 수"/>
+            <View style="@style/ContentStroke"/>
 
-            <TextView android:id="@+id/bbs_content_comment_count"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:layout_marginRight="10dp"
-                      android:textColor="@color/summary_text"
-                      android:textSize="11dp"
-                      android:textStyle="bold"/>
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_weight="3">
+
+                <LinearLayout android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:gravity="center"
+                              android:layout_weight="1"
+                              android:orientation="horizontal">
+
+                    <ImageView android:layout_width="12dp"
+                               android:layout_height="wrap_content"
+                               android:src="@drawable/ic_thumb_up_black_48dp"
+                               android:layout_marginRight="2dp"/>
+
+                    <TextView
+                            style="@style/ContentActionText"
+                            android:text="@string/row_bbs_content_post_hit"
+                    />
+                </LinearLayout>
+
+                <View android:layout_width="1px"
+                      android:layout_height="match_parent"
+                      android:background="@color/general_stroke_color"
+                      android:layout_marginBottom="10dp"
+                      android:layout_marginTop="10dp"/>
+
+                <LinearLayout android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:gravity="center"
+                              android:layout_weight="1"
+                              android:orientation="horizontal">
+
+                    <ImageView android:layout_width="12dp"
+                               android:layout_height="wrap_content"
+                               android:src="@drawable/ic_forum_black_48dp"
+                               android:layout_marginRight="2dp"/>
+
+                    <TextView
+                            style="@style/ContentActionText"
+                            android:text="@string/row_bbs_content_write_comment"
+                    />
+                </LinearLayout>
 
 
-            <TextView
-                    android:id="@+id/bbs_content_view_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/summary_text"
-                    android:textSize="11dp"
-                    android:textStyle="bold"/>
+                <View android:layout_width="1px"
+                      android:layout_height="match_parent"
+                      android:background="@color/general_stroke_color"
+                      android:layout_marginBottom="10dp"
+                      android:layout_marginTop="10dp"/>
+
+                <LinearLayout android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:gravity="center"
+                              android:layout_weight="1"
+                              android:orientation="horizontal">
+
+                    <ImageView android:layout_width="12dp"
+                               android:layout_height="wrap_content"
+                               android:src="@drawable/ic_visibility_black_48dp"
+                               android:layout_marginRight="2dp"/>
+
+                    <TextView
+                            style="@style/ContentActionText"
+                            android:text="@string/row_bbs_content_more_info"
+                    />
+                </LinearLayout>
 
 
+            </LinearLayout>
         </LinearLayout>
-
-        <View android:layout_width="match_parent"
-              android:layout_height="1px"
-              android:layout_marginTop="10dp"
-              android:background="#e0e0e0"/>
-
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="25dp"
-                      android:orientation="horizontal"
-                      android:layout_marginTop="10dp"
-                      android:layout_weight="3">
-
-            <LinearLayout android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:gravity="center"
-                          android:layout_weight="1"
-                          android:orientation="horizontal">
-
-                <ImageView android:layout_width="12dp"
-                           android:layout_height="wrap_content"
-                           android:src="@drawable/ic_thumb_up_black_48dp"
-                android:layout_marginRight="2dp"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="11dp"
-                        android:textStyle="bold"
-                        android:text="좋아요"
-                />
-            </LinearLayout>
-
-            <LinearLayout android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:gravity="center"
-                          android:layout_weight="1"
-                          android:orientation="horizontal">
-
-                <ImageView android:layout_width="12dp"
-                           android:layout_height="wrap_content"
-                           android:src="@drawable/ic_forum_black_48dp"
-                           android:layout_marginRight="2dp"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:textSize="11dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/summary_text"
-                        android:text="댓글작성"
-                />
-            </LinearLayout>
-            <LinearLayout android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:gravity="center"
-                          android:layout_weight="1"
-                          android:orientation="horizontal">
-
-                <ImageView android:layout_width="12dp"
-                           android:layout_height="wrap_content"
-                           android:src="@drawable/ic_visibility_black_48dp"
-                           android:layout_marginRight="2dp"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:textColor="@color/summary_text"
-                        android:textSize="11dp"
-                        android:textStyle="bold"
-                        android:text="더 보기"
-                />
-            </LinearLayout>
-
-
-        </LinearLayout>
-
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

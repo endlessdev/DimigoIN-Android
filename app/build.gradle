@@ -49,5 +49,5 @@ dependencies {
     compile 'me.relex:circleindicator:1.1.5@aar'
     apply plugin: 'com.android.application' // or apply plugin: 'java'
     apply plugin: 'me.tatarka.retrolambda'
-
+    compile 'jp.wasabeef:richeditor-android:1.2.0'
 }

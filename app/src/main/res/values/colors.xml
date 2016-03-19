@@ -31,4 +31,5 @@
     <color name="loading_color_4">#AD1457</color>
 
     <color name="general_text_color">#424242</color>
+    <color name="general_stroke_color">#e0e0e0</color>
 </resources>

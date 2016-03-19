@@ -113,7 +113,6 @@ public class ContentViewHolder extends RecyclerView.ViewHolder {
     }
 
     private List<String> getPhotoList(String html) {
-
         final List<String> retList = new ArrayList<>();
         final Document document = Jsoup.parse(html);
 

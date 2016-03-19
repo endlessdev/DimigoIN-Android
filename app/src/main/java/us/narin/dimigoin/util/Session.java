@@ -18,7 +18,6 @@ public class Session {
         editor.putString("userPw", userPw).apply();
         editor.putString("userToken", userToken).apply();
         editor.putString("userCookie", userCookie).apply();
-
     }
 
     public static String getAccountId(Context mContext){

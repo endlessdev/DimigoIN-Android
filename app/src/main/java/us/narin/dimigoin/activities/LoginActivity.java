@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import butterknife.Bind;
+import butterknife.BindString;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -26,6 +27,7 @@ import us.narin.dimigoin.R;
 import us.narin.dimigoin.api.ApiObject;
 import us.narin.dimigoin.api.ApiRequests;
 import us.narin.dimigoin.model.pojo.Login;
+import us.narin.dimigoin.model.pojo.LoginUser;
 import us.narin.dimigoin.services.gcm.RegistrationService;
 import us.narin.dimigoin.util.Schema;
 import us.narin.dimigoin.util.Session;
@@ -42,6 +44,10 @@ public class LoginActivity extends AppCompatActivity {
     ProcessButton signInBtn;
     @Bind(R.id.login_main_bg)
     ImageView loginBackground;
+
+    @BindString(R.string.login_failed_msg)
+    String loginFailedMsg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,24 +74,12 @@ public class LoginActivity extends AppCompatActivity {
                         final Login login = response.body();
                         if (response.code() == 200) {
 
-                            new Thread(() -> {
-                                try {
-//                                디미고인 웹버전으로 로그인하여 쿠키 탈취
-                                    Connection.Response loginResponse = Jsoup.connect(Schema.LOGIN_WEB_ENDPOINT)
-                                            .data(Schema.LOGIN_WEB_PARAM_ID, userId)
-                                            .data(Schema.LOGIN_WEB_PARAM_PW, userPw)
-                                            .method(Connection.Method.POST)
-                                            .execute();
+                            LoginUser loginUser = new LoginUser();
+                            loginUser.setUserId(userId);
+                            loginUser.setUserPw(userPw);
+                            loginUser.setUserToken(login.getData().getToken());
 
-//                                API가 미반영된 기능에 대한 지원을 위해 쿠키를 저장합니다
-//                                쿠키는 로그인 성공마다 갱신되어 반영됩니다.
-                                    final String userCookie = loginResponse.cookie(Schema.LOGIN_COOKIE_KEY);
-                                    Session.saveAccount(getApplicationContext(), userId, userPw, login.getData().getToken(), userCookie);
-
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }).start();
+                            getCookie(loginUser);
 
                             signInBtn.setProgress(100);
 
@@ -110,11 +104,33 @@ public class LoginActivity extends AppCompatActivity {
                 });
 
             } else {
-                signInBtn.setErrorText(getString(R.string.login_failed_network_msg));
+                signInBtn.setErrorText(loginFailedMsg);
                 setEnabled(true);
             }
         });
 
+    }
+
+    private void getCookie(LoginUser loginUser) {
+        new Thread(() -> {
+            try {
+//              디미고인 웹버전으로 로그인하여 쿠키 탈취
+                Connection.Response loginResponse = Jsoup.connect(Schema.LOGIN_WEB_ENDPOINT)
+                        .data(Schema.LOGIN_WEB_PARAM_ID, loginUser.getUserId())
+                        .data(Schema.LOGIN_WEB_PARAM_PW, loginUser.getUserPw())
+                        .method(Connection.Method.POST)
+                        .execute();
+
+//              API가 미반영된 기능에 대한 지원을 위해 쿠키를 저장합니다
+//              쿠키는 로그인 성공마다 갱신되어 반영됩니다.
+
+                final String userCookie = loginResponse.cookie(Schema.LOGIN_COOKIE_KEY);
+                Session.saveAccount(getApplicationContext(), loginUser.getUserId(), loginUser.getUserPw(), loginUser.getUserToken(), userCookie);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     private void setEnabled(boolean isEnabled) {

@@ -23,7 +23,6 @@ public class BoardContentAdapter extends RecyclerView.Adapter<ContentViewHolder>
         this.contentList = contentList;
         this.boardIds = boardIds;
         this.mContext = mContext;
-
     }
 
     @Override

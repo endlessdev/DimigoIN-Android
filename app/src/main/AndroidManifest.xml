@@ -65,10 +65,11 @@
             android:name=".activities.ContentActivity"
             android:label="@string/title_activity_content"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
-            android:name=".activities.CommentActivity"
-            android:label="@string/title_activity_comment"
-            android:theme="@style/PopupTheme">
+            android:name=".activities.EditorActivity"
+            android:label="@string/title_activity_editor"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

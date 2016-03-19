@@ -3,7 +3,6 @@ package us.narin.dimigoin.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +12,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
@@ -31,7 +33,7 @@ import us.narin.dimigoin.model.pojo.Article;
 import us.narin.dimigoin.model.pojo.Comment;
 import us.narin.dimigoin.model.pojo.ContentDetail;
 import us.narin.dimigoin.model.pojo.File;
-import us.narin.dimigoin.util.NestedInRecyclerManager;
+import us.narin.dimigoin.util.NestedInRecycler;
 import us.narin.dimigoin.util.Schema;
 import us.narin.dimigoin.util.Session;
 import us.narin.dimigoin.util.TimeStamp;
@@ -90,7 +92,6 @@ public class ContentActivity extends AppCompatActivity {
     private Integer contentId;
     private String boardId;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,7 +130,7 @@ public class ContentActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response<ContentDetail> response) {
 
-                List<ContentDetail.Data> responseResultData  = response.body().getResultData();
+                List<ContentDetail.Data> responseResultData = response.body().getResultData();
 
                 //JSON 응답 (타입오류)의 이상으로 제일 첫번째의 데이터를 가져옵니다.
                 ContentDetail.Data responseData = responseResultData.get(0);
@@ -178,32 +179,28 @@ public class ContentActivity extends AppCompatActivity {
     }
 
     private void submitComment() {
-        final Handler commentWritingHandler = new Handler();
-        final Thread commentWritingThread = new Thread(() -> {
-            commentWritingHandler.post(() -> requestComment(contentId, commentField.getText().toString(), boardId));
+//        Handler commentWritingHandler = new Handler();
+        Thread commentWritingThread = new Thread(() -> {
+            try {
+                Connection.Response response = Jsoup.connect(Schema.ENDPOINT + "/bbs/write_comment_update.php")
+                        .cookie(Schema.LOGIN_COOKIE_KEY, Session.getUserCookie(getApplicationContext()))
+                        .data("wr_id", contentId.toString())
+                        .data("wr_content", commentField.getText().toString())
+                        .data("w", "c")
+                        .data("bo_table", boardId).method(Connection.Method.POST)
+                        .execute();
+                if (response.statusCode() == 200) {
+//                    Toast.makeText(getApplicationContext(), "댓글 작성 성공", Toast.LENGTH_LONG).show();
+                } else {
+//                    Toast.makeText(getApplicationContext(), "댓글 작성 실패", Toast.LENGTH_LONG).show();
+                }
+
+                Log.d(TAG, response.body());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         commentWritingThread.start();
-    }
-
-    private void requestComment(Integer contentId, String contentComment, String boardTable) {
-        try {
-            Connection.Response response = Jsoup.connect(Schema.ENDPOINT + "/bbs/write_comment_update.php")
-                    .cookie(Schema.LOGIN_COOKIE_KEY, Session.getUserCookie(getApplicationContext()))
-                    .data("wr_id", contentId.toString())
-                    .data("wr_content", contentComment)
-                    .data("w", "c")
-                    .data("bo_table", boardTable).method(Connection.Method.POST)
-                    .execute();
-            if (response.statusCode() == 200) {
-                Toast.makeText(getApplicationContext(), "댓글 작성 성공", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getApplicationContext(), "댓글 작성 실패", Toast.LENGTH_LONG).show();
-            }
-
-            Log.d(TAG, response.body());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void setFileVisibillity(List<File> fileList) {
@@ -224,15 +221,15 @@ public class ContentActivity extends AppCompatActivity {
     private void setWhenHasComments(BoardCommentAdapter commentAdapter) {
         commentWrapper.setVisibility(View.VISIBLE);
         //fix NestiedScroollView in RecyclerView
-        commentView.setLayoutManager(new NestedInRecyclerManager(getApplicationContext()));
+        commentView.setLayoutManager(new NestedInRecycler(getApplicationContext()));
         commentView.setHasFixedSize(false);
         commentView.setNestedScrollingEnabled(false);
         commentView.setAdapter(commentAdapter);
-
     }
 
-    private Intent downloadFile(String filePath){
+    private Intent downloadFile(String filePath) {
         String fileUrl = Schema.FILE_DOWNLOAD + filePath + "/" + Session.getUserToken(getApplicationContext());
         return new Intent(Intent.ACTION_VIEW, Uri.parse(fileUrl));
     }
+
 }

@@ -37,10 +37,26 @@ public interface ApiRequests {
     );
 
     @POST("/push/register")
-    Call<Result> getResult(
+    Call<Result> getRegisterResult(
             @Field("id") String userId,
             @Field("token") String userToken,
             @Field("phoneType") Integer phoneType,
             @Field("deviceId") String deviceId
     );
+
+    //TODO ENDPOINT CHANGE TO ingang.dimigo.in
+    @POST("/request_do.php")
+    Call<Result> requestIngang(
+            @Field("seat") Integer ingangSeat,
+            @Field("when") Integer submitTime,
+            @Field("code") Integer capchaCode
+    );
+
+    //TODO ENDPOINT CHANGE TO counsel.dimigo.in
+    @POST("/request_do.php")
+    Call<Result> requestCounsel(
+            @Field("schedule") String submitSchedule,
+            @Field("ctegory") String submitCategory
+    );
+
 }

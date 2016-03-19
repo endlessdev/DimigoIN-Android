@@ -9,14 +9,9 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 
+//Intent로 LoginData의 객체 전달을 위해 Serializable 구현
+
 public class LoginData implements Serializable{
-//
-//    "number": 21,
-//            "expireTime": "2016-01-04",
-//            "grade": 1,
-//            "class": 3,
-//            "token": "dae442a062075104d9af",
-//            "name": "염승우"
 
     String token;
     Integer grade;
