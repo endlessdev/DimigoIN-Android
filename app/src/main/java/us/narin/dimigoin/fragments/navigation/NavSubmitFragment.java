@@ -40,6 +40,7 @@ public class NavSubmitFragment extends Fragment {
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
         mViewPager.setAdapter(new SubmitAdapter(fragmentManager, getActivity()));
+        mViewPager.setOffscreenPageLimit(0);
 
         mTabLayout.setupWithViewPager(mViewPager);
 

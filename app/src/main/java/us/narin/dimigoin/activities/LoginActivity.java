@@ -9,17 +9,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dd.processbutton.ProcessButton;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
+
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -55,8 +60,15 @@ public class LoginActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        Glide.with(getApplicationContext()).load(R.drawable.login_bg).diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().bitmapTransform(new GrayscaleTransformation(getApplicationContext())).into(loginBackground);
+        // Glide Setting
+        Glide.with(getApplicationContext())
+                .load(R.drawable.login_bg)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .bitmapTransform(new GrayscaleTransformation(getApplicationContext()))
+                .into(loginBackground);
 
+        // Login Method
         signInBtn.setOnClickListener(view -> {
             signInBtn.setProgress(50);
             final String userId = accountField.getText().toString();
@@ -66,12 +78,13 @@ public class LoginActivity extends AppCompatActivity {
 
             ApiRequests apiRequests = ApiObject.initClient(Schema.API_ENDPOINT);
             Call<Login> callLogin = apiRequests.apiLogin(userId, userPw);
+
             if (isConnectionAvailable()) {
                 callLogin.enqueue(new Callback<Login>() {
-
                     @Override
                     public void onResponse(Response<Login> response) {
                         final Login login = response.body();
+
                         if (response.code() == 200) {
 
                             LoginUser loginUser = new LoginUser();
@@ -90,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                             startActivity(mainIntent);
 
                         } else {
-                            signInBtn.setErrorText(getString(R.string.login_failed_msg));
+                            signInBtn.setErrorText(loginFailedMsg);
                             signInBtn.setProgress(-1);
                             setEnabled(true);
                         }
@@ -98,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Throwable t) {
+                        signInBtn.setErrorText(getString(R.string.login_failed_msg));
                         signInBtn.setProgress(-1);
                         setEnabled(true);
                     }

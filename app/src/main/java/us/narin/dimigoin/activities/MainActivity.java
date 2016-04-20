@@ -16,9 +16,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+
 import com.bumptech.glide.Glide;
+
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 import us.narin.dimigoin.R;
 import us.narin.dimigoin.fragments.navigation.MainFragment;
@@ -35,7 +38,6 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "MainActivity";
 
     private static final String userDataFormat = "%d학년 %d반 %d번 재학생";
-
 
     public TabLayout mTabLayout;
     public Toolbar toolbar;
@@ -58,9 +60,9 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mTabLayout = (TabLayout)findViewById(R.id.main_tab);
+        mTabLayout = (TabLayout) findViewById(R.id.main_tab);
 
-        if(getSupportActionBar()!=null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(null);
             getSupportActionBar().setLogo(R.mipmap.ic_logo_text);
         }
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.getMenu().getItem(0).setChecked(true);
 
+        Toast.makeText(getApplicationContext(), String.format(userDataFormat, login.getData().getGrade(), login.getData().getStdClass(), login.getData().getNumber()), Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -105,9 +108,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.nav_home:
                 setFragment(Schema.TransactionFrag.HOME);
                 break;
@@ -130,26 +132,27 @@ public class MainActivity extends AppCompatActivity
     private void setFragment(Schema.TransactionFrag flag) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         switch (flag) {
             case HOME:
                 MainFragment mainFragment = new MainFragment();
                 fragmentTransaction.replace(R.id.content_fragment, mainFragment);
-                Log.d(TAG,"setFragment(HOME)");
+                Log.d(TAG, "setFragment(HOME)");
                 break;
             case INFO:
                 NavInfoFragment infoNavFragment = new NavInfoFragment(fragmentManager);
                 fragmentTransaction.replace(R.id.content_fragment, infoNavFragment);
-                Log.d(TAG,"setFragment(INFO)");
+                Log.d(TAG, "setFragment(INFO)");
                 break;
             case COMMUNITY:
                 NavCommunityFragment communityNavFragment = new NavCommunityFragment(fragmentManager);
                 fragmentTransaction.replace(R.id.content_fragment, communityNavFragment);
-                Log.d(TAG,"setFragment(COMMUNITY)");
+                Log.d(TAG, "setFragment(COMMUNITY)");
                 break;
             case SUBMIT:
                 NavSubmitFragment submitNavFragment = new NavSubmitFragment(fragmentManager);
                 fragmentTransaction.replace(R.id.content_fragment, submitNavFragment);
-                Log.d(TAG,"setFragment(SUBMIT)");
+                Log.d(TAG, "setFragment(SUBMIT)");
                 break;
         }
         fragmentTransaction.commit();

@@ -8,6 +8,6 @@
         android:id="@+id/counsel_test_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="상담신청"/>
+        android:text="상담신청" />
 
 </FrameLayout>

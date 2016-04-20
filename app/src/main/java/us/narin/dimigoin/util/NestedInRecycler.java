@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 /**
  * Created by Seungwoo on 2016. 2. 21..
  */
-public class NestedInRecycler extends LinearLayoutManager
-{
+public class NestedInRecycler extends LinearLayoutManager {
 
     public NestedInRecycler(Context context) {
         super(context);
@@ -79,27 +78,32 @@ public class NestedInRecycler extends LinearLayoutManager
                                    int heightSpec, int[] measuredDimension) {
 
         View view = recycler.getViewForPosition(position);
-        if (view.getVisibility() == View.GONE) {
-            measuredDimension[0] = 0;
-            measuredDimension[1] = 0;
-            return;
-        }
-        // For adding Item Decor Insets to view
-        super.measureChildWithMargins(view, 0, 0);
-        RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
-        int childWidthSpec = ViewGroup.getChildMeasureSpec(
-                widthSpec,
-                getPaddingLeft() + getPaddingRight() + getDecoratedLeft(view) + getDecoratedRight(view),
-                p.width);
-        int childHeightSpec = ViewGroup.getChildMeasureSpec(
-                heightSpec,
-                getPaddingTop() + getPaddingBottom() + getDecoratedTop(view) + getDecoratedBottom(view),
-                p.height);
-        view.measure(childWidthSpec, childHeightSpec);
 
-        // Get decorated measurements
-        measuredDimension[0] = getDecoratedMeasuredWidth(view) + p.leftMargin + p.rightMargin;
-        measuredDimension[1] = getDecoratedMeasuredHeight(view) + p.bottomMargin + p.topMargin;
-        recycler.recycleView(view);
+        if (view == null) {
+            return;
+        } else {
+            if (view.getVisibility() == View.GONE) {
+                measuredDimension[0] = 0;
+                measuredDimension[1] = 0;
+                return;
+            }
+            // For adding Item Decor Insets to view
+            super.measureChildWithMargins(view, 0, 0);
+            RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
+            int childWidthSpec = ViewGroup.getChildMeasureSpec(
+                    widthSpec,
+                    getPaddingLeft() + getPaddingRight() + getDecoratedLeft(view) + getDecoratedRight(view),
+                    p.width);
+            int childHeightSpec = ViewGroup.getChildMeasureSpec(
+                    heightSpec,
+                    getPaddingTop() + getPaddingBottom() + getDecoratedTop(view) + getDecoratedBottom(view),
+                    p.height);
+            view.measure(childWidthSpec, childHeightSpec);
+
+            // Get decorated measurements
+            measuredDimension[0] = getDecoratedMeasuredWidth(view) + p.leftMargin + p.rightMargin;
+            measuredDimension[1] = getDecoratedMeasuredHeight(view) + p.bottomMargin + p.topMargin;
+            recycler.recycleView(view);
+        }
     }
 }

@@ -1,63 +1,99 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context="us.narin.dimigoin.fragments.navigation.MainFragment"
-                android:background="@color/default_bg">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    tools:context="us.narin.dimigoin.fragments.navigation.MainFragment">
 
 
     <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadingEdge="none"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fadingEdge="none"
-            android:fillViewport="true">
-
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:orientation="vertical"
-                      android:layout_marginLeft="10dp"
-                      android:layout_marginRight="10dp"
-                      android:layout_marginTop="10dp">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/home_title_today_meal"
-                    style="@style/ContentTitle"/>
+                style="@style/ContentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_title_today_meal" />
 
             <android.support.v7.widget.CardView
+                style="@style/ContentCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    style="@style/ContentCard">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/meal_breakfast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="아침 : 치킨" />
+
+                    <TextView
+                        android:id="@+id/meal_lunch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="점심 : 치킨" />
+
+                    <TextView
+                        android:id="@+id/meal_evening"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="저녁 : 치킨" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <TextView
+                style="@style/ContentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="신청 현황" />
+
+            <android.support.v7.widget.CardView
+                style="@style/ContentCard"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
 
 
             </android.support.v7.widget.CardView>
 
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="신청 현황"
-                    style="@style/ContentTitle"/>
+                style="@style/ContentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오늘의 시간표" />
 
             <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    style="@style/ContentCard">
-
-
-            </android.support.v7.widget.CardView>
-
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="오늘의 시간표"
-                    style="@style/ContentTitle"/>
-
-            <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    style="@style/ContentCard">
+                style="@style/ContentCard"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp">
 
 
             </android.support.v7.widget.CardView>

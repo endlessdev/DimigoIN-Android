@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
@@ -35,7 +36,7 @@ public class BoardFragment extends Fragment {
     private List<Content> boardList;
     private SwipeRefreshLayout refreshBoard;
 
-    public BoardFragment(Schema.BoardIds boardIds){
+    public BoardFragment(Schema.BoardIds boardIds) {
         this.boardIds = boardIds;
     }
 
@@ -68,6 +69,11 @@ public class BoardFragment extends Fragment {
         mRecyclerView.addOnScrollListener(new EndlessScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int current_page) {
+
+                if (getBoardList(current_page).size() <= 0) {
+                    return;
+                }
+
                 boardList.addAll(getBoardList(current_page));
                 Log.d("BoardFragment " + boardIds.toString(), "onLoadMore() : " + current_page);
                 itemAdapter.notifyDataSetChanged();

@@ -1,60 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:layout_marginTop="10dp"
-              android:layout_marginLeft="10dp"
-              android:layout_marginRight="10dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <Button android:id="@+id/bbs_comment_profile"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/circle_profile"
-                android:text="박"
-                android:textColor="#E91E63"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                style="?android:attr/borderlessButtonStyle"
-        />
-
-
-        <LinearLayout android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:orientation="vertical">
-
-            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
-
-                <TextView android:id="@+id/bbs_comment_author"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:textStyle="bold"
-                          android:textColor="#212121"
-                          android:layout_marginRight="5dp"
-                          android:text="정희범"/>
+        <Button
+            android:id="@+id/bbs_comment_profile"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/circle_profile"
+            android:text="박"
+            android:textColor="#E91E63"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
 
-                <TextView android:id="@+id/bbs_comment_time"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:textStyle="bold"
-                          android:textColor="@color/summary_text"
-                          android:textSize="@dimen/content_small_text"
-                          android:text="5분전"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/bbs_comment_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="정희범"
+                    android:textColor="#212121"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/bbs_comment_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5분전"
+                    android:textColor="@color/summary_text"
+                    android:textSize="@dimen/content_small_text"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
 
-            <TextView android:id="@+id/bbs_comment_content"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:textColor="#9E9E9E"
-                      android:text="asdfasdfasdfasdfdasfasdfdsaf\n\nssafsaasdf"/>
+            <TextView
+                android:id="@+id/bbs_comment_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asdfasdfasdfasdfdasfasdfdsaf\n\nssafsaasdf"
+                android:textColor="#9E9E9E" />
 
         </LinearLayout>
 

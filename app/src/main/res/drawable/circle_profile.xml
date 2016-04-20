@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-       android:shape="oval">
+    android:shape="oval">
     <!-- Add Color for background-->
-    <solid android:color="#FCE4EC"/>
+    <solid android:color="#FCE4EC" />
     <!-- Add Color and width for border-->
     <!--<stroke android:width="2dp"-->
-            <!--android:color="#E91E63"/>-->
+    <!--android:color="#E91E63"/>-->
     <!-- add radious for rounded shape-->
     <corners
-            android:bottomLeftRadius="2dp"
-            android:bottomRightRadius="2dp"
-            android:topLeftRadius="2dp"
-            android:topRightRadius="2dp"/>
+        android:bottomLeftRadius="2dp"
+        android:bottomRightRadius="2dp"
+        android:topLeftRadius="2dp"
+        android:topRightRadius="2dp" />
 </shape>

@@ -73,6 +73,7 @@ public class NavInfoFragment extends Fragment {
 
         ViewPager mViewPager = (ViewPager) mView.findViewById(R.id.fragment_info_vp);
         mViewPager.setAdapter(new InfoAdapter(fragmentManager, getActivity(), fragmentList));
+        mViewPager.setOffscreenPageLimit(0);
 
         mTabLayout.setupWithViewPager(mViewPager);
 

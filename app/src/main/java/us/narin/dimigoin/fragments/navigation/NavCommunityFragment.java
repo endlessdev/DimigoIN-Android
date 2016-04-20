@@ -72,6 +72,7 @@ public class NavCommunityFragment extends Fragment {
         }
 
         mViewPager.setAdapter(new BoardAdapter(fragmentManager, getActivity(), fragmentList));
+        mViewPager.setOffscreenPageLimit(0);
 
         mTabLayout.setupWithViewPager(mViewPager);
 

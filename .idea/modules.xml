@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DimigoIN.iml" filepath="$PROJECT_DIR$/DimigoIN.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DimigoIN-Android.iml" filepath="$PROJECT_DIR$/DimigoIN-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../richeditor-android/richeditor/richeditor.iml" filepath="$PROJECT_DIR$/../richeditor-android/richeditor/richeditor.iml" />
     </modules>
   </component>
 </project>

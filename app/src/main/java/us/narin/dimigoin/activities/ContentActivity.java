@@ -16,12 +16,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
+
 import com.bumptech.glide.Glide;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
+
 import retrofit.Call;
 import retrofit.Callback;
 import retrofit.Response;
