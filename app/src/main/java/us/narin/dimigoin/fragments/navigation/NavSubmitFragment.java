@@ -24,7 +24,7 @@ public class NavSubmitFragment extends Fragment {
     @Bind(R.id.fragment_submit_vp)
     ViewPager mViewPager;
 
-    public NavSubmitFragment(FragmentManager fragmentManager) {
+    public void setFragmentManager(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 

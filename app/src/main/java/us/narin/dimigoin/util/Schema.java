@@ -17,8 +17,7 @@ public class Schema {
 
     public static final String WEBVIEW_DEFAULT_STYLE = "<body style=\"margin: 0; padding: 0; color:#626262;\"><style>img{display: inline; width: 100%; height: auto; max-width: 100%;}</style><style>iframe{display: inline; height: auto; max-width: 100%;}</style>";
     public static final String WEBVIEW_DEFAULT_TYPE = "text/html; charset=UTF-8";
-
-//    public static final String REGISTRATION_READY = "registrationReady";
+//  public static final String REGISTRATION_READY = "registrationReady";
     public static final String REGISTRATION_GENERATING = "registrationGenerating";
     public static final String REGISTRATION_COMPLETE = "registrationComplete";
 
@@ -26,7 +25,36 @@ public class Schema {
 
     public static final Integer GCM_REGISTRATION_PHONETYPE = 1;
 
-    public static enum BoardIds {
+
+    /*
+        ## WARNING! ## THIS IS TEMP SUBMIT PAGE! DONT USE MAIN WAY..
+     */
+    public static final String S_PROTOCAL = "http://";
+    public static final String S_URL = ".allabout.kr/";
+
+    public enum SubmitURL {
+        COUNSEL("counsel", "request_wee.php"),
+        INGANG("ingang", "request.php"),
+        MENTO("mento", "request.php"),
+        SNACK("snack", "request.php"),
+        MORNINGSONG("song", "morning_song.php"),
+        STAY("stay", "?module=request"),
+        DOR("dor", "laundry/request.php"),
+        SUGANG("sugang", "requestList.php");
+
+
+        private final String submitUrl;
+
+        SubmitURL(String subUrl, String down) {
+            this.submitUrl = S_PROTOCAL + subUrl + S_URL + down;
+        }
+
+        public String toString() {
+            return submitUrl;
+        }
+    }
+
+    public enum BoardIds {
 
         FILE("fileboard"),
         FREE("freeboard"),
@@ -43,7 +71,7 @@ public class Schema {
 
         private final String boardId;
 
-        private BoardIds(String boardId) {
+        BoardIds(String boardId) {
             this.boardId = boardId;
         }
 
@@ -53,7 +81,7 @@ public class Schema {
 
     }
 
-    public static enum TransactionFrag {
+    public enum TransactionFrag {
 
         HOME(0),
         INFO(1),

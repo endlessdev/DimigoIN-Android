@@ -36,21 +36,21 @@ public class NavInfoFragment extends Fragment {
     };
 
     private  Fragment[] boardFragments = {
-            new BoardFragment(Schema.BoardIds.NOTICE),
-            new BoardFragment(Schema.BoardIds.FREE),
+            new BoardFragment().setBoardIds(Schema.BoardIds.NOTICE),
+            new BoardFragment().setBoardIds(Schema.BoardIds.FREE),
             new MealFragment(),
-            new BoardFragment(Schema.BoardIds.CONTEST_INFO),
-            new BoardFragment(Schema.BoardIds.KIN),
-            new BoardFragment(Schema.BoardIds.ENJOY),
-            new BoardFragment(Schema.BoardIds.PLAYGROUND),
-            new BoardFragment(Schema.BoardIds.MARKET),
-            new BoardFragment(Schema.BoardIds.NOTICE_MOBILE)
+            new BoardFragment().setBoardIds(Schema.BoardIds.CONTEST_INFO),
+            new BoardFragment().setBoardIds(Schema.BoardIds.KIN),
+            new BoardFragment().setBoardIds(Schema.BoardIds.ENJOY),
+            new BoardFragment().setBoardIds(Schema.BoardIds.PLAYGROUND),
+            new BoardFragment().setBoardIds(Schema.BoardIds.MARKET),
+            new BoardFragment().setBoardIds(Schema.BoardIds.NOTICE_MOBILE)
     };
 
     TabLayout mTabLayout;
     FragmentManager fragmentManager;
 
-    public NavInfoFragment(FragmentManager fragmentManager) {
+    public void setFragmentManager(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 

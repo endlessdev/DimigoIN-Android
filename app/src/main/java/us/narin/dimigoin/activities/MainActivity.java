@@ -140,17 +140,20 @@ public class MainActivity extends AppCompatActivity
                 Log.d(TAG, "setFragment(HOME)");
                 break;
             case INFO:
-                NavInfoFragment infoNavFragment = new NavInfoFragment(fragmentManager);
+                NavInfoFragment infoNavFragment = new NavInfoFragment();
+                infoNavFragment.setFragmentManager(fragmentManager);
                 fragmentTransaction.replace(R.id.content_fragment, infoNavFragment);
                 Log.d(TAG, "setFragment(INFO)");
                 break;
             case COMMUNITY:
-                NavCommunityFragment communityNavFragment = new NavCommunityFragment(fragmentManager);
+                NavCommunityFragment communityNavFragment = new NavCommunityFragment();
+                communityNavFragment.setFragmentManager(fragmentManager);
                 fragmentTransaction.replace(R.id.content_fragment, communityNavFragment);
                 Log.d(TAG, "setFragment(COMMUNITY)");
                 break;
             case SUBMIT:
-                NavSubmitFragment submitNavFragment = new NavSubmitFragment(fragmentManager);
+                NavSubmitFragment submitNavFragment = new NavSubmitFragment();
+                submitNavFragment.setFragmentManager(fragmentManager);
                 fragmentTransaction.replace(R.id.content_fragment, submitNavFragment);
                 Log.d(TAG, "setFragment(SUBMIT)");
                 break;

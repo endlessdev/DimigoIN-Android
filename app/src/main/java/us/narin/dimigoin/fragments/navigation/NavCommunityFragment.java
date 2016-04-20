@@ -48,7 +48,7 @@ public class NavCommunityFragment extends Fragment {
     @Bind(R.id.community_fab)
     FloatingActionButton writorBtn;
 
-    public NavCommunityFragment(FragmentManager fragmentManager) {
+    public void setFragmentManager(FragmentManager fragmentManager) {
         this.fragmentManager = fragmentManager;
     }
 
@@ -68,7 +68,7 @@ public class NavCommunityFragment extends Fragment {
         final List<Fragment> fragmentList = new ArrayList<>();
 
         for (Schema.BoardIds element : boardIds) {
-            fragmentList.add(new BoardFragment(element));
+            fragmentList.add(new BoardFragment().setBoardIds(element));
         }
 
         mViewPager.setAdapter(new BoardAdapter(fragmentManager, getActivity(), fragmentList));

@@ -36,8 +36,10 @@ public class BoardFragment extends Fragment {
     private List<Content> boardList;
     private SwipeRefreshLayout refreshBoard;
 
-    public BoardFragment(Schema.BoardIds boardIds) {
+    public BoardFragment setBoardIds(Schema.BoardIds boardIds) {
         this.boardIds = boardIds;
+
+        return this;
     }
 
     @Override
