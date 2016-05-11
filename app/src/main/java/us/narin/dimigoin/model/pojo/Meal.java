@@ -1,5 +1,8 @@
 package us.narin.dimigoin.model.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,31 +11,46 @@ import java.util.List;
  */
 public class Meal {
 
-    List<String> mealMorning = new ArrayList<>();
-    List<String> mealLunch = new ArrayList<>();
-    List<String> mealDinner = new ArrayList<>();
-    List<String> mealSnack = new ArrayList<>();
+    @SerializedName("no")
+    long mealNumber;
+    @SerializedName("date")
+    String mealDate;
+    @SerializedName("breakfast")
+    String mealBreakfast;
+    @SerializedName("lunch")
+    String mealLunch;
+    @SerializedName("dinner")
+    String mealDinner;
+    @SerializedName("snack")
+    String mealSnack;
+    @SerializedName("added")
+    String mealAdded;
 
-    public Meal(List<String> mealMorning, List<String>mealLunch, List<String> mealDinner, List<String> mealSnack){
-        this.mealMorning = mealMorning;
-        this.mealLunch = mealLunch;
-        this.mealDinner = mealDinner;
-        this.mealSnack = mealSnack;
+    public long getMealNumber() {
+        return mealNumber;
     }
 
-    public List<String> getMealMorning() {
-        return mealMorning;
+    public String getMealAdded() {
+        return mealAdded;
     }
 
-    public List<String> getMealLunch() {
-        return mealLunch;
+    public String getMealBreakfast() {
+        return mealBreakfast;
     }
 
-    public List<String> getMealDinner() {
+    public String getMealDate() {
+        return mealDate;
+    }
+
+    public String getMealDinner() {
         return mealDinner;
     }
 
-    public List<String> getMealSnack() {
+    public String getMealLunch() {
+        return mealLunch;
+    }
+
+    public String getMealSnack() {
         return mealSnack;
     }
 }

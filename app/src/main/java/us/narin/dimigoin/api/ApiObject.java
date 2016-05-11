@@ -4,12 +4,13 @@ import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
 public class ApiObject {
+    private static String baseURL;
 
     private static ApiRequests apiRequests;
 
     public static ApiRequests initClient(String baseUrl) {
 
-        if (apiRequests == null) {
+        if (apiRequests == null || !baseURL.equals(baseUrl)) {
 
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl)
@@ -17,6 +18,8 @@ public class ApiObject {
                     .build();
 
             apiRequests = retrofit.create(ApiRequests.class);
+
+            baseURL = baseUrl;
         }
         return apiRequests;
     }

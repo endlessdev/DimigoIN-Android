@@ -59,4 +59,9 @@ public interface ApiRequests {
             @Field("ctegory") String submitCategory
     );
 
+    @GET("/pages/dimibob_getdata.php")
+    Call<Meal> requestMeal();
+
+
+
 }
