@@ -1,16 +1,26 @@
 package us.narin.dimigoin.fragments.navigation;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ExploreByTouchHelper;
 import android.support.v4.widget.TextViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -29,11 +39,32 @@ public class MainFragment extends Fragment {
     private TextView txtMealTitle;
     private TextView txtMealContent;
 
+    private Handler handler;
+
     private int nowTime = Integer.valueOf((new SimpleDateFormat("HH")).format(new Date()));
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View returnView = designInit(inflater, container);
+
+        (new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                try {
+                    Document doc;
+                    Elements titles = null;
+
+                    doc = Jsoup.connect("http://dimigo.in/index.php").get();
+                    titles = doc.select("div.wrapper div.at-content div.container div.row div div div.resp_3 div");
+
+                    for(Element e: titles){
+                        txtMealTitle.setText(e.text());
+                    }
+                } catch (IOException ioe) {}
+            }
+        }).run();
 
         meal = apiRequests.requestMeal();
         meal.enqueue(new Callback<Meal>() {
