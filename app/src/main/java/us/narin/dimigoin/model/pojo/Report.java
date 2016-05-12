@@ -5,6 +5,7 @@ package us.narin.dimigoin.model.pojo;
  */
 public class Report {
 
+
     String reportSubject;
     String reportTeacher;
     String reportDeadDate;

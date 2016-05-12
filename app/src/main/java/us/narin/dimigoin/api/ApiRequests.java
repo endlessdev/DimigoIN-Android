@@ -60,7 +60,9 @@ public interface ApiRequests {
     );
 
     @GET("/pages/dimibob_getdata.php")
-    Call<Meal> requestMeal();
+    Call<Meal> requestMeal(
+            @Query("d") String date
+    );
 
 
 

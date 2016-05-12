@@ -39,34 +39,14 @@ public class MainFragment extends Fragment {
     private TextView txtMealTitle;
     private TextView txtMealContent;
 
-    private Handler handler;
-
     private int nowTime = Integer.valueOf((new SimpleDateFormat("HH")).format(new Date()));
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View returnView = designInit(inflater, container);
 
-        (new Thread() {
-            @Override
-            public void run() {
-                super.run();
-
-                try {
-                    Document doc;
-                    Elements titles = null;
-
-                    doc = Jsoup.connect("http://dimigo.in/index.php").get();
-                    titles = doc.select("div.wrapper div.at-content div.container div.row div div div.resp_3 div");
-
-                    for(Element e: titles){
-                        txtMealTitle.setText(e.text());
-                    }
-                } catch (IOException ioe) {}
-            }
-        }).run();
-
-        meal = apiRequests.requestMeal();
+        final String today = (new SimpleDateFormat("yyyyMMdd")).format(new Date());
+        meal = apiRequests.requestMeal(today);
         meal.enqueue(new Callback<Meal>() {
             @Override
             public void onResponse(Response<Meal> response) {
@@ -78,7 +58,7 @@ public class MainFragment extends Fragment {
                     if(nowTime <= 8) {
                         mealContent = meals.getMealBreakfast();
                         mealTitle = getString(R.string.home_title_today_meal_breakfast);
-                    } else if(nowTime <= 13) {
+                    } else if(nowTime <= 14) {
                         mealContent = meals.getMealLunch();
                         mealTitle = getString(R.string.home_title_today_meal_lunch);
                     }else if(nowTime <= 18 || nowTime >= 18) {
@@ -90,6 +70,8 @@ public class MainFragment extends Fragment {
 
                     txtMealContent.setText(mealContent.replaceAll("/", " "));
                     txtMealTitle.setText(mealTitle);
+                } else {
+                    txtMealContent.setText(response.errorBody().toString() + " [C] " + response.code());
                 }
 
             }
@@ -110,7 +92,7 @@ public class MainFragment extends Fragment {
         TabLayout tabLayout = ((MainActivity)getActivity()).mTabLayout;
         tabLayout.setVisibility(View.GONE);
 
-        txtMealTitle = (TextView)mView.findViewById(R.id.txt_meal_title);
+        txtMealTitle = (TextView)mView.findViewById(R.id.txt_meal_time);
         txtMealContent = (TextView)mView.findViewById(R.id.txt_meal_content);
 
         return mView;

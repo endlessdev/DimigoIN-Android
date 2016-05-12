@@ -62,9 +62,10 @@
     <string name="login_failed_network_msg">네트워크를 확인해주세요.</string>
     <string name="login_succeed_msg">로그인 성공</string>
     <string name="login_processing_msg">로그인 중입니다.</string>
-    <string name="home_title_today_meal_breakfast">오늘의 급식 - 아침</string>
-    <string name="home_title_today_meal_lunch">오늘의 급식 - 점심</string>
-    <string name="home_title_today_meal_dinner">오늘의 급식 - 저녁</string>
+    <string name="home_title_today_meal">오늘의 급식</string>
+    <string name="home_title_today_meal_breakfast">아침</string>
+    <string name="home_title_today_meal_lunch">점심</string>
+    <string name="home_title_today_meal_dinner">저녁</string>
     <string name="row_bbs_content_write_comment">댓글 작성</string>
     <string name="row_bbs_content_post_hit">좋아요</string>
     <string name="row_bbs_content_more_info">더 보기</string>
